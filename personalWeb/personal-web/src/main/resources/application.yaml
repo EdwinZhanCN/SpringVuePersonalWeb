@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://edwinzhan-database.database.windows.net:1433;databaseName=personal-web-data
+    username: edwinzhan
+    password: edw1Nzhan@o4::26
