@@ -40,10 +40,10 @@ public class SecurityConfiguration {
                 )
                 .csrf(AbstractHttpConfigurer::disable
                 )
-                .exceptionHandling(exceptionHandling ->
-                        exceptionHandling
-                                .authenticationEntryPoint(this::onAuthenticationFailure)
-                )
+//                .exceptionHandling(exceptionHandling ->
+//                        exceptionHandling
+//                                .authenticationEntryPoint(this::onAuthenticationFailure)
+//                )
                 .build();
     }
 

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/personal-web/personal-web.iml" filepath="$PROJECT_DIR$/personal-web/personal-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/personal-web-frontend/personal-web-frontend.iml" filepath="$PROJECT_DIR$/personal-web-frontend/personal-web-frontend.iml" />
       <module fileurl="file://$PROJECT_DIR$/personalWeb.iml" filepath="$PROJECT_DIR$/personalWeb.iml" />
     </modules>

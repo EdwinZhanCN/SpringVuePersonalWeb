@@ -29,11 +29,15 @@ export default {
           });
 
           if (!response.ok) {
+            console.log('not ok')
             throw new Error(`Upload failed: ${response.statusText}`);
           }
 
           const image = await response.json();
           console.log('File uploaded:', image);
+
+          alert('File uploaded successfully!');
+
         } catch (error) {
           console.error(error.message);
         }
