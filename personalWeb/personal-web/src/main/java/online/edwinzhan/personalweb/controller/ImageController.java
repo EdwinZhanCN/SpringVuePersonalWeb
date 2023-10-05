@@ -27,7 +27,7 @@ public class ImageController {
         image.setFilename(file.getOriginalFilename());
         image.setFileData(file.getBytes());
         image.setDescription(description);
-        image.setUploadTime(String.valueOf(LocalDateTime.now()));
+        image.setUploadTime(LocalDateTime.now());
         Image savedImage = imageService.saveImage(image);
         return ResponseEntity.ok(savedImage);
     }

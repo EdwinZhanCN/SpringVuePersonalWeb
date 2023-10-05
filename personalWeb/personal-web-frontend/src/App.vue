@@ -1,6 +1,5 @@
 <template>
   <navigation-bar/>
-  <image-upload/>
 </template>
 
 <script>
@@ -14,5 +13,5 @@
       imageUpload,
     },
   })
-
 </script>
+

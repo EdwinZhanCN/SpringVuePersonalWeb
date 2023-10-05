@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter//lombok
 @Setter
 @Entity
@@ -16,7 +18,8 @@ public class Image {
     private Long id;
     private String filename;
     private String description;
+    @Lob
     private byte[] fileData;
-    private String uploadTime;
+    private LocalDateTime uploadTime;
 
 }
