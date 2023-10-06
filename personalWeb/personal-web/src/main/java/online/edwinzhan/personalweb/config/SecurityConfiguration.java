@@ -9,6 +9,7 @@ import online.edwinzhan.personalweb.entity.RestBean;
 import online.edwinzhan.personalweb.service.AuthorizeService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,10 +17,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.*;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.io.IOException;
 
@@ -33,6 +35,7 @@ public class SecurityConfiguration{
         return http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
+                                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->
@@ -48,6 +51,7 @@ public class SecurityConfiguration{
                 .userDetailsService(authorizeService)
                 .csrf(AbstractHttpConfigurer::disable
                 )
+                .cors(corsSpec -> corsSpec.configurationSource(this.corsConfigurationSource()))
 //                .exceptionHandling(exceptionHandling ->
 //                        exceptionHandling
 //                                .authenticationEntryPoint(this::onAuthenticationFailure)
@@ -55,6 +59,17 @@ public class SecurityConfiguration{
                 .build();
     }
 
+    private CorsConfigurationSource corsConfigurationSource(){
+        CorsConfiguration cors = new CorsConfiguration();
+        cors.addAllowedOriginPattern("*");
+        cors.setAllowCredentials(true);
+        cors.addAllowedHeader("*");
+        cors.addAllowedMethod("*");
+        cors.addExposedHeader("*");
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", cors);
+        return source;
+    }
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity security) throws Exception{

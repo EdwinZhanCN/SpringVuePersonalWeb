@@ -1,18 +1,13 @@
 <template>
-  <div class="rounded-rectangle" @click="navigate">
-    <h3>Edwin Zhan</h3>
-  </div>
+  <div @click = "login()" class="rounded-rectangle"><h3>Edwin Zhan</h3></div>
 </template>
 
-<script>
-export default {
-  name: 'RoundedRectangle',
-  methods: {
-    navigate() {
-      window.location.href = '/new-page.html';
-    },
-  },
-};
+<script setup>
+import router from "@/router";
+
+const login = () =>{
+  router.push('/login')
+}
 </script>
 
 <style scoped>
@@ -25,5 +20,6 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
   line-height: 1em;
+  color: black;
 }
 </style>

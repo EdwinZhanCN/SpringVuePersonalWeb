@@ -5,8 +5,12 @@
 </template>
 
 <script>
+import imageUpload from "@/components/imageUpload.vue";
 export default {
   name: 'album-gallery',
+  components: {
+    imageUpload
+  },
   data() {
     return {
       covers: [

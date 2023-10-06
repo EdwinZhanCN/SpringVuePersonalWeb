@@ -29,7 +29,6 @@ export default {
           });
 
           if (!response.ok) {
-            console.log('not ok')
             throw new Error(`Upload failed: ${response.statusText}`);
           }
 

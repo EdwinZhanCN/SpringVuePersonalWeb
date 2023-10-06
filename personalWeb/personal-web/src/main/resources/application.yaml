@@ -7,3 +7,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+logging:
+  level:
+    root: DEBUG
+    org.springframework: DEBUG
+    org.apache.coyote.http11.Http11Processor: DEBUG
+

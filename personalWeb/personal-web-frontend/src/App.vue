@@ -1,17 +1,11 @@
-<template>
-  <navigation-bar/>
-</template>
+<script setup>
 
-<script>
-  import {defineComponent} from "vue";
-  import navigationBar from "@/components/navigationBar.vue";
-  import imageUpload from "@/components/imageUpload.vue";
-
-  export default defineComponent({
-    components: {
-      navigationBar,
-      imageUpload,
-    },
-  })
 </script>
 
+<template>
+  <router-view></router-view>
+</template>
+
+<style scoped>
+
+</style>
