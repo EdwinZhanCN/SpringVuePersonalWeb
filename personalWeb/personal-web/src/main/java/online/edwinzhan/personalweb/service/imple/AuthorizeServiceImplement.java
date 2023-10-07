@@ -12,6 +12,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -33,6 +34,8 @@ public class AuthorizeServiceImplement implements AuthorizeService {
     @Resource
     StringRedisTemplate template;
 
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if(username == null)
@@ -48,12 +51,15 @@ public class AuthorizeServiceImplement implements AuthorizeService {
     }
 
     @Override
-    public boolean sendValidateEmail(String email, String sessionId) {
+    public String sendValidateEmail(String email, String sessionId) {
         String key = "email:" + sessionId +":" + email;
         Long expire = template.getExpire(key, TimeUnit.SECONDS);
         if (expire != null && expire > 0 && expire > 120) {
             // 这里，我们知道key存在且其TTL在0到120秒之间
-            return false;
+            return "Request busy, please try again later";
+        }
+        if(mapper.findAccountByNameOrEmail(email) != null){
+            return "This email has been register by others.";
         }
         //generate verification code
         Random random = new Random();
@@ -68,12 +74,34 @@ public class AuthorizeServiceImplement implements AuthorizeService {
         try{
             mailSender.send(message);
             template.opsForValue().set(key, String.valueOf(code), 3, TimeUnit.MINUTES);
-            return true;
+            return null;
         }catch (MailException e){
             e.printStackTrace();
-            return false;
+            return "Check if the email address is valid";
         }
         //if send failed, delete the value in Redis
         //When User is registering, get the value from Redis, then check if the verification code identical
+
+
+    }
+    @Override
+    public String validateAndRegister(String username, String password, String email, String code, String sessionId){
+        String key = "email:" + sessionId + ":" + email;
+        if(Boolean.TRUE.equals(template.hasKey(key))){
+            String s = template.opsForValue().get(key);
+            if(s == null) return "The verification code is invalid, please request again";
+            if(s.equals(code)){
+                password = encoder.encode(password);
+                if(mapper.createAccount(username, password, email) > 0){
+                    return null;
+                }else{
+                    return "Error occur, please contact administration";
+                }
+            }else{
+                return "Please check your verification code";
+            }
+        }else{
+            return "Please request a verification code";
+        }
     }
 }

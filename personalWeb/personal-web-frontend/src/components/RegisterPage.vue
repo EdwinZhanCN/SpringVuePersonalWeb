@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {nextTick, reactive, ref} from 'vue'
+import {nextTick, reactive, ref, onMounted} from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import router from '@/router'
 import {post} from './net/index'
@@ -111,6 +111,15 @@ const submitForm = (formEl: FormInstance | undefined) => {
   formEl.validate((valid) => {
     if (valid) {
       console.log('submit!')
+      post('/api/auth/register', {
+        username: ruleForm.username,
+        password: ruleForm.pass,
+        email: ruleForm.email,
+        code: ruleForm.emailConfig,
+      }, (message) => {
+        ElMessage.success(message)
+        router.push("/login")
+      })
     } else {
       console.log('error submit!')
       ElMessage("Please complete the register form")
@@ -129,8 +138,39 @@ const validateEmail = () =>{
     email: ruleForm.email
   }, (message)=>{
     ElMessage.success(message)
+    cool.value = 60
+    startCountdown()
   })
 }
+
+const cool = ref(0);
+
+function startCountdown() {
+  let endTime = new Date().getTime() + 60000; // 当前时间加上60秒（60000毫秒）
+  localStorage.setItem("endTime", endTime.toString());
+  updateCountdown();
+}
+
+function updateCountdown() {
+  const now = new Date().getTime();
+  const endTime = parseInt(localStorage.getItem("endTime"), 10);
+
+  if (!endTime) return;
+
+  const timeLeft = Math.floor((endTime - now) / 1000);
+
+  if (timeLeft > 0) {
+    cool.value = timeLeft;
+    setTimeout(updateCountdown, 1000);
+  } else {
+    cool.value = 0;
+    localStorage.removeItem("endTime");
+  }
+}
+
+onMounted(() => {
+  updateCountdown();
+});
 
 const minimize = ref(false);
 const goToLogin = async () => {
@@ -140,6 +180,7 @@ const goToLogin = async () => {
     router.push('/Login');
   }, 1300);
 };
+
 
 </script>
 
@@ -163,14 +204,15 @@ const goToLogin = async () => {
               @validate="onValidate"
           >
             <el-form-item prop="username" label="Username">
-              <el-input v-model="ruleForm.username" />
+              <el-input v-model="ruleForm.username" :maxlength = "15"/>
             </el-form-item>
             <el-form-item label="Password" prop="pass">
-              <el-input v-model="ruleForm.pass" type="password" autocomplete="off" />
+              <el-input v-model="ruleForm.pass" :maxlength = "16" type="password" autocomplete="off" />
             </el-form-item>
-            <el-form-item label="Confirm" prop="checkPass">
+            <el-form-item label="Confirm" :maxlength = "16" prop="checkPass">
               <el-input
                   v-model="ruleForm.checkPass"
+                  :maxlength = "16"
                   type="password"
                   autocomplete="off"/>
             </el-form-item>
@@ -180,10 +222,10 @@ const goToLogin = async () => {
             <el-form-item label="Verify" prop="emailConfig">
               <el-row :gutter = "20" style="width: 100%">
                 <el-col :span = "16">
-                  <el-input type="text" placeholder="Email verification code"></el-input>
+                  <el-input type="text"  :maxlength = "6" placeholder="Email verification code"></el-input>
                 </el-col>
                 <el-col :span = "8">
-                <el-button type="success" @click = "validateEmail" :disabled="!isEmailValid">Get code</el-button>
+                <el-button type="success" @click = "validateEmail" :disabled="!isEmailValid || cool > 0">{{cool > 0 ? cool + 's' : "Get Code"}}</el-button>
                 </el-col>
               </el-row>
             </el-form-item>
@@ -208,6 +250,7 @@ const goToLogin = async () => {
 
 <style>
 h1{
+  animation: fadeIn 0.3s forwards;
   padding-top: 30px;
   margin-block-end: 0;
   margin-block-start: 0;
