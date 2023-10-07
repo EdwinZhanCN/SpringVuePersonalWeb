@@ -4,12 +4,29 @@ spring:
     url: jdbc:mysql://localhost:3306/personal_web
     username: root
     password: 12345678
+  mail:
+    host: smtp.gmail.com
+
+    username: edwinzhanofficialnonreply@gmail.com
+    password: hjlj nrsd qwxo trwn
+    port: 465
+    properties:
+      from: edwinzhanofficialnonreply@gmail.com
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+  data:
+    redis:
+      database: 0
+      host: localhost
+      port: 6379
   jpa:
     hibernate:
       ddl-auto: update
-logging:
-  level:
-    root: DEBUG
-    org.springframework: DEBUG
-    org.apache.coyote.http11.Http11Processor: DEBUG
-
+#logging:
+#  level:
+#    root: DEBUG
+#    org.springframework: DEBUG
+#    org.apache.coyote.http11.Http11Processor: DEBUG

@@ -2,9 +2,8 @@
 import 'element-plus/dist/index.css'
 import {ElMessage} from "element-plus";
 import { post } from "./net/index.js";
-import { reactive } from 'vue';
+import {reactive, ref, nextTick} from 'vue';
 import router from "@/router";
-
 const form = reactive({
   username:'',
   password: '',
@@ -26,39 +25,49 @@ const login = () =>{
   }
 }
 
+const expanding = ref(false);
+
+
+const goToRegister = async () => {
+  expanding.value = true;
+  await nextTick();
+  setTimeout(() => {
+    router.push('/register');
+  }, 1200);
+};
+
 </script>
 
 <template>
-
     <div class= "login-interface-background">
-      <div class = "login-interface">
-        <h2>Login</h2>
-        <div class = "space-center">
-          <el-input v-model= "form.username"
-                    type="text"
-                    size="large"
-                    class = "text-area"
-                    style="padding-bottom: 20px"
-                    clearable prefix-icon="User"/>
-          <el-input v-model = "form.password"
-                    prefix-icon="Lock"
-                    type = "password"
-                    size = "large"
-                    class="text-area"
-                    show-password/>
-          <div style="padding-bottom: 20px">
-            <el-row style="justify-content: space-between">
+      <div :class="{'expanding': expanding}" class = "login-interface">
+          <h2 :class="{'fadeOut': expanding}">Login</h2>
+          <div :class="{'fadeOut': expanding}" class = "space-center">
+            <el-input v-model= "form.username"
+                      type="text"
+                      size="large"
+                      class = "text-area"
+                      style="padding-bottom: 20px"
+                      clearable prefix-icon="User"/>
+            <el-input v-model = "form.password"
+                      prefix-icon="Lock"
+                      type = "password"
+                      size = "large"
+                      class="text-area"
+                      show-password/>
+            <div style="padding-bottom: 20px">
+              <el-row style="justify-content: space-between">
                 <el-checkbox v-model='form.remember' label="remember me"/>
                 <el-link :underline="false">Forget Password?</el-link>
-            </el-row>
+              </el-row>
+            </div>
+            <el-button @click = "login()" class="login-Button" type="primary" round>Login</el-button>
+            <el-divider>
+              <span style = "color: grey"> No account?</span>
+            </el-divider>
+            <el-button @click="goToRegister" class="login-Button" type = "warning" round>Register</el-button>
           </div>
-          <el-button @click = "login()" class="login-Button" type="primary" round>Login</el-button>
-          <el-divider>
-            <span style = "color: grey"> No account?</span>
-          </el-divider>
-          <el-button class="login-Button" type = "warning" round>Register</el-button>
         </div>
-      </div>
     </div>
 </template>
 
@@ -72,17 +81,6 @@ h2{
   margin-block-start: 0;
 }
 
-
-
-.picture-text p{
-  margin-left: 20px;
-  height: 150px;
-  width: 100%;
-  font-size: 60px;
-  margin-block-start: 0;
-  margin-block-end: 0;
-}
-
 .login-interface-background{
   align-items: center;
   display: flex;
@@ -91,6 +89,7 @@ h2{
 }
 
 .login-interface{
+  animation: fadeIn 0.2s forwards;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,7 +97,7 @@ h2{
   width: 80%;
   max-width: 578px;
   min-width: 374px;
-  height: auto;
+  height: 374px;
   overflow: hidden;
   border-radius: 10px;
   background: white;
@@ -113,8 +112,8 @@ h2{
 
 .text-area{
   padding-left: 0;
-  padding-right: 0 ;
-  padding-bottom: 0px;
+  padding-right: 0;
+  padding-bottom: 0;
   display: flex;
 }
 
@@ -122,4 +121,36 @@ h2{
   padding-top: 20px;
   padding-bottom: 20px;
 }
+
+.login-interface-background .expanding {
+  animation: expand 1.5s forwards;
+}
+
+.login-interface-background .fadeOut {
+  animation: fadeOut 1.5s forwards;
+}
+
+@keyframes expand {
+  to {
+    max-width: 999999px;
+    width: 100%;
+    height: calc(100%);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from{
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 </style>

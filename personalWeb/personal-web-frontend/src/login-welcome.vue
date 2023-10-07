@@ -3,7 +3,7 @@
     <div class="picture-text">
       <typing-effect text= "Welcome to Edwinzhan Personal web!" />
     </div>
-    <router-view/>
+      <router-view/>
   </div>
 </template>
 
@@ -37,12 +37,21 @@ export default defineComponent({
   }
 }
 
-
 .picture-text{
+  font-size: 60px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   height: 100vh;
   background: rgb(0,199,190);
+}
+
+.picture-text p{
+  margin-left: 20px;
+  height: 150px;
+  width: 100%;
+  font-size: 60px;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 </style>

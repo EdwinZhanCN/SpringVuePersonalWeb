@@ -1,27 +1,22 @@
 <template>
-  <div>
-    <img v-for="(cover, index) in covers" :key="index" :src="cover.src" :alt="cover.alt" />
-  </div>
+  <image-upload/>
+  <el-button @click = "logout()" type="primary" round>log out</el-button>
 </template>
 
-<script>
+<script setup>
+
 import imageUpload from "@/components/imageUpload.vue";
-export default {
-  name: 'album-gallery',
-  components: {
-    imageUpload
-  },
-  data() {
-    return {
-      covers: [
-        { title: 'iDea' },
-        { title: 'Progress' },
-        { title: 'self-intro' },
-        { title: 'Blog' },
-      ]
-    }
-  }
-};
+import {get} from "@/components/net";
+import {ElMessage} from "element-plus";
+import router from "@/router";
+
+const logout = () => {
+
+  get("/api/auth/logout", (message) => {
+   ElMessage.success(message)
+    router.push('/login')
+  })
+}
 </script>
 
 <style scoped>
