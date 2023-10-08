@@ -6,7 +6,7 @@ import {post} from '@/net/index.js'
 import {ElMessage} from "element-plus";
 
 const ruleFormRef = ref<FormInstance>()
-
+const isResettingPassword = ref(false)
 const checkEmail = (rule: any, value: any, callback: any) => {
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
@@ -134,11 +134,12 @@ const resetForm = (formEl: FormInstance | undefined) => {
 }
 
 const validateEmail = () =>{
+  cool.value = 60
   post('/api/auth/valid-email', {
-    email: ruleForm.email
+    email: ruleForm.email,
+    isResettingPassword: isResettingPassword.value
   }, (message)=>{
     ElMessage.success(message)
-    cool.value = 60
     startCountdown()
   })
 }

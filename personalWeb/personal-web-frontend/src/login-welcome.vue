@@ -1,14 +1,22 @@
 <template>
   <div class = "login-template">
     <div class="picture-text">
-      <typing-effect :username = "username" text= "Welcome to Edwinzhan Personal Web" />
+      <typing-effect text= "Welcome to Edwinzhan Personal web!" />
     </div>
-    <router-view></router-view>
+      <router-view/>
   </div>
 </template>
 
-<script setup>
+<script>
+import {defineComponent} from "vue";
 import typingEffect from "@/components/animation/TypingEffect.vue";
+
+export default defineComponent({
+  components: {
+    typingEffect,
+  },
+})
+
 </script>
 
 <style>

@@ -22,10 +22,6 @@ public class AuthorizeInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
-        if (authentication == null) {
-            System.out.println("Authentication object is null!");
-            return false;
-        }
         User user = (User)authentication.getPrincipal();
         String username = user.getUsername();
         AccountUser accountUser = mapper.findAccountUserByNameOrEmail(username);

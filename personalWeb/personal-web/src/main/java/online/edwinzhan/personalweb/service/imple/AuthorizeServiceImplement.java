@@ -4,6 +4,7 @@ import jakarta.annotation.Resource;
 import online.edwinzhan.personalweb.entity.auth.Account;
 import online.edwinzhan.personalweb.mapper.UserMapper;
 import online.edwinzhan.personalweb.service.AuthorizeService;
+import org.hibernate.annotations.DialectOverride;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.Key;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 

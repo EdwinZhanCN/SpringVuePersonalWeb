@@ -1,5 +1,8 @@
 <template>
-  <navigation-bar/>
+  <div style="margin-top: 20px">
+    <navigation-bar/>
+  </div>
+
 </template>
 
 <script>

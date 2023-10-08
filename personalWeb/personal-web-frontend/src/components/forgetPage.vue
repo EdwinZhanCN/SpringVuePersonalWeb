@@ -3,8 +3,6 @@ import {onMounted, reactive, ref, nextTick} from "vue";
 import {ElMessage, FormInstance, FormRules} from "element-plus";
 import {post} from "@/net/index.js";
 import router from '@/router/index.js';
-import {Arrayable} from "element-plus/es/utils";
-import {FormItemProp} from "element-plus/es/components/form/src/form-item";
 
 const minimize = ref(false);
 const isEmailValidate = ref(false);
@@ -37,12 +35,12 @@ const resetForm = (ruleFormRef) => {
 
 
 const validateEmail = () =>{
+  cool.value = 60
   post('/api/auth/valid-email', {
     email: ruleForm.email,
     isResettingPassword: isResettingPassword.value,
   }, (message)=>{
     ElMessage.success(message)
-    cool.value = 60
     startCountdown()
   })
 }
