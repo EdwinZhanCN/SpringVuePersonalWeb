@@ -1,14 +1,20 @@
 <script setup>
 import 'element-plus/dist/index.css'
 import {ElMessage} from "element-plus";
-import { post } from "./net/index.js";
-import {reactive, ref, nextTick} from 'vue';
+import {get, post} from "@/net/index.js";
+import {reactive, ref, nextTick, watch} from 'vue';
 import router from "@/router";
+import {useStore} from "@/stores";
+
+const store = useStore();
 const form = reactive({
   username:'',
   password: '',
   remember: false
 })
+
+defineExpose({ form });
+
 
 const login = () =>{
   if(!form.username || !form.password){
@@ -18,9 +24,14 @@ const login = () =>{
       username: form.username,
       password: form.password,
       remember: form.remember,
-    }, (message) =>{
+    }, (message) => {
       ElMessage.success(message)
-      router.push('/album-gallery')
+      get('api/user/me', (message) => {
+        store.auth.user = message
+        router.push('/')
+      },() => {
+        store.auth.user = null
+      })
     })
   }
 }
@@ -33,6 +44,13 @@ const goToRegister = async () => {
   await nextTick();
   setTimeout(() => {
     router.push('/register');
+  }, 1200);
+};
+const goToResetPassword = async () => {
+  expanding.value = true;
+  await nextTick();
+  setTimeout(() => {
+    router.push('/forget-password');
   }, 1200);
 };
 
@@ -58,7 +76,7 @@ const goToRegister = async () => {
             <div style="padding-bottom: 20px">
               <el-row style="justify-content: space-between">
                 <el-checkbox v-model='form.remember' label="remember me"/>
-                <el-link :underline="false">Forget Password?</el-link>
+                <el-link @click = "goToResetPassword" :underline="false">Forget Password?</el-link>
               </el-row>
             </div>
             <el-button @click = "login()" class="login-Button" type="primary" round>Login</el-button>

@@ -6,14 +6,17 @@
 <script setup>
 
 import imageUpload from "@/components/imageUpload.vue";
-import {get} from "@/components/net";
+import {get} from "@/net/index.js";
 import {ElMessage} from "element-plus";
 import router from "@/router";
+import {useStore} from "@/stores";
 
+const store = useStore()
 const logout = () => {
 
   get("/api/auth/logout", (message) => {
-   ElMessage.success(message)
+    ElMessage.success(message)
+    store.auth.user = null
     router.push('/login')
   })
 }

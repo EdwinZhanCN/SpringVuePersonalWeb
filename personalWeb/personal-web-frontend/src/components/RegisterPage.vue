@@ -2,7 +2,7 @@
 import {nextTick, reactive, ref, onMounted} from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import router from '@/router'
-import {post} from './net/index'
+import {post} from '@/net/index.js'
 import {ElMessage} from "element-plus";
 
 const ruleFormRef = ref<FormInstance>()
@@ -222,7 +222,7 @@ const goToLogin = async () => {
             <el-form-item label="Verify" prop="emailConfig">
               <el-row :gutter = "20" style="width: 100%">
                 <el-col :span = "16">
-                  <el-input type="text"  :maxlength = "6" placeholder="Email verification code"></el-input>
+                  <el-input v-model="ruleForm.emailConfig" type="text"  :maxlength = "6" placeholder="Email verification code"></el-input>
                 </el-col>
                 <el-col :span = "8">
                 <el-button type="success" @click = "validateEmail" :disabled="!isEmailValid || cool > 0">{{cool > 0 ? cool + 's' : "Get Code"}}</el-button>
@@ -235,12 +235,12 @@ const goToLogin = async () => {
             </el-form-item>
           </el-form>
           <div style = "display: flex; flex-direction: row; padding-left: 80px; ">
-        <span style = "padding-right: 5px">
-          Already have an account?
-        </span>
-            <span @click = "goToLogin" style="color: grey; cursor: pointer">
-          Login here
-        </span>
+            <span style = "padding-right: 5px">
+              Already have an account?
+            </span>
+                <span @click = "goToLogin" style="color: grey; cursor: pointer">
+              Login here
+            </span>
           </div>
         </div>
       </div>

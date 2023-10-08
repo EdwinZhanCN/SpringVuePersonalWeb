@@ -1,7 +1,7 @@
 package online.edwinzhan.personalweb.service.imple;
 
 import jakarta.annotation.Resource;
-import online.edwinzhan.personalweb.entity.Account;
+import online.edwinzhan.personalweb.entity.auth.Account;
 import online.edwinzhan.personalweb.mapper.UserMapper;
 import online.edwinzhan.personalweb.service.AuthorizeService;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.security.Key;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -39,7 +38,7 @@ public class AuthorizeServiceImplement implements AuthorizeService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if(username == null)
-            throw new UsernameNotFoundException("the user name cannot be null");
+            throw new UsernameNotFoundException("the username cannot be null");
         Account account = mapper.findAccountByNameOrEmail(username);
         if(account == null)
             throw new UsernameNotFoundException("The password or username incorrect");
@@ -51,14 +50,14 @@ public class AuthorizeServiceImplement implements AuthorizeService {
     }
 
     @Override
-    public String sendValidateEmail(String email, String sessionId) {
-        String key = "email:" + sessionId +":" + email;
+    public String sendValidateEmail(String email, boolean isResettingPassword, String sessionId) {
+        String key = isResettingPassword? "email:" + sessionId +":" + email + ":true" : ("email:" + sessionId +":" + email);
         Long expire = template.getExpire(key, TimeUnit.SECONDS);
         if (expire != null && expire > 0 && expire > 120) {
             // 这里，我们知道key存在且其TTL在0到120秒之间
             return "Request busy, please try again later";
         }
-        if(mapper.findAccountByNameOrEmail(email) != null){
+        if(mapper.findAccountByNameOrEmail(email) != null && !isResettingPassword){
             return "This email has been register by others.";
         }
         //generate verification code
@@ -92,6 +91,7 @@ public class AuthorizeServiceImplement implements AuthorizeService {
             if(s == null) return "The verification code is invalid, please request again";
             if(s.equals(code)){
                 password = encoder.encode(password);
+                template.delete(key);
                 if(mapper.createAccount(username, password, email) > 0){
                     return null;
                 }else{
@@ -103,5 +103,33 @@ public class AuthorizeServiceImplement implements AuthorizeService {
         }else{
             return "Please request a verification code";
         }
+    }
+
+    @Override
+    public boolean emailExists(String email){
+        return mapper.findAccountByNameOrEmail(email) != null;
+    }
+
+    @Override
+    public String verifyCode(String email, String code, String sessionId){
+        String key = "email:" + sessionId + ":" + email + ":true";
+        if(Boolean.TRUE.equals(template.hasKey(key))){
+            String s = template.opsForValue().get(key);
+            if(s == null) return "The verification code is invalid, please request again";
+            if(s.equals(code)){
+                template.delete(key);
+                return null;
+            }else{
+                return "Please check your verification code";
+            }
+        }else{
+            return "Please request a verification code";
+        }
+    }
+
+    @Override
+    public boolean resetPassword(String password, String email){
+        password = encoder.encode(password);
+        return mapper.resetPasswordByEmail(password, email) > 0;
     }
 }

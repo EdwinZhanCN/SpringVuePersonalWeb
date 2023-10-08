@@ -1,4 +1,4 @@
-package online.edwinzhan.personalweb.entity;
+package online.edwinzhan.personalweb.entity.auth;
 
 
 import lombok.Data;
