@@ -41,18 +41,19 @@ public class SecurityConfiguration{
         return http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
+                                .requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers("/api/image/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->
                         formLogin
-                                .loginProcessingUrl("/api/image/login")
+                                .loginProcessingUrl("/api/auth/login")
                                 .successHandler(this::onAuthenticationSuccess)
                                 .failureHandler(this::onAuthenticationFailure)
                 )
                 .logout(logout ->
                         logout
-                                .logoutUrl("/api/image/logout")
+                                .logoutUrl("/api/auth/logout")
                                 .logoutSuccessHandler(this::onAuthenticationSuccess)
                 )
                 .exceptionHandling(exceptionHandling ->

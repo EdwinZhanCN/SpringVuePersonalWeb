@@ -1,17 +1,14 @@
 <template>
-  <div @click = "login()" class="rounded-rectangle"><h3>Edwin Zhan</h3></div>
+  <div class="rounded-rectangle"><h3>Edwin Zhan</h3></div>
 </template>
 
 <script setup>
-import router from "@/router";
 
-const login = () =>{
-  router.push('/login')
-}
 </script>
 
 <style scoped>
 .rounded-rectangle {
+  font-family: "Helvetica Neue",serif;
   cursor: pointer;
   width: auto;  /* 或根据需要设置宽度 */
   height: auto;

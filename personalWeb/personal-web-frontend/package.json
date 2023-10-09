@@ -15,10 +15,13 @@
     "vue": "^3.3.4",
     "vue-axios": "^3.5.2",
     "vue-router": "^4.2.5",
+    "vue-seamless-scroll": "^1.1.23",
+    "vue3-seamless-scroll": "^2.0.1",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.3.4",
+    "sass": "^1.69.0",
     "unplugin-auto-import": "^0.16.6",
     "unplugin-vue-components": "^0.25.2",
     "vite": "^4.4.9"

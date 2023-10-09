@@ -1,5 +1,6 @@
-import  {createRouter, createWebHistory} from 'vue-router'
+import {createRouter, createWebHistory} from 'vue-router'
 import {useStore} from "@/stores";
+import {get} from "@/net";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,7 +17,7 @@ const router = createRouter({
             children:[
                 {
                     path: '',
-                    name: 'login-',
+                    name: 'login-login',
                     component: () => import('@/components/login-page.vue')
 
                 },{
@@ -30,26 +31,49 @@ const router = createRouter({
                 }]
         },
         {
-            path:'/album-gallery',
-            name:'album-gallery',
-            component: () => import('@/components/albumGallery.vue')
+            path:'/upload-image',
+            name:'upload-image',
+            component: () => import('@/components/upload-image.vue')
         },
 
     ]
 
 })
 
-router.beforeEach((to, from, next)=>{
-    const store = useStore()
-    if(store.auth.user != null && to.name.startsWith('login-')){
-        next('/')
-    }else if(store.auth.user == null && to.fullPath.startsWith("/album-gallery")){
-        next('/login')
-    }else if(to.matched.length === 0){
-        next("/")
-    }else{
-        next()
+
+router.beforeEach(async (to, from, next) => {
+    const store = useStore();
+
+    if (store.auth.user === null) {
+        try {
+            await new Promise((resolve, reject) => {
+                get('api/user/me', (message) => {
+                    store.auth.user = message;
+                    resolve();
+                }, () => {
+                    store.auth.user = null;
+                    resolve();
+                });
+            });
+        } catch (error) {
+            store.auth.user = null;
+            // ... 错误处理逻辑
+        }
     }
-})
+
+    if (store.auth.user != null && to.fullPath.startsWith('/login')) {
+        next('/');
+        console.log(store.auth.user);
+    } else if (store.auth.user == null && to.fullPath.startsWith("/upload-image")) {
+        next('/login');
+        console.log(store.auth.user);
+    } else if (to.matched.length === 0) {
+        next("/");
+        console.log(store.auth.user);
+    } else {
+        next();
+        console.log(store.auth.user);
+    }
+});
 
 export default router;

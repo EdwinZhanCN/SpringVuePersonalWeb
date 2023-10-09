@@ -36,7 +36,7 @@ const resetForm = (ruleFormRef) => {
 
 const validateEmail = () =>{
   cool.value = 60
-  post('/api/image/valid-email', {
+  post('/api/auth/valid-email', {
     email: ruleForm.email,
     isResettingPassword: isResettingPassword.value,
   }, (message)=>{
@@ -75,7 +75,7 @@ onMounted(() => {
 });
 
 const verifyEmail = () =>{
-  post('/api/image/email-verify', {
+  post('/api/auth/email-verify', {
     email: ruleForm.email
   }, (message)=>{
     next()
@@ -84,7 +84,7 @@ const verifyEmail = () =>{
   })
 }
 const verifyCode = () =>{
-  post('/api/image/email-validate-verify', {
+  post('/api/auth/email-validate-verify', {
     email: ruleForm.email,
     code: ruleForm.emailConfig
   }, (message)=>{
@@ -168,7 +168,7 @@ const goToLogin = async () => {
 };
 
 const resetPassWord = () => {
-  post('/api/image/reset-password', {
+  post('/api/auth/reset-password', {
     password: ruleForm.pass,
   }, (message) => {
     next()

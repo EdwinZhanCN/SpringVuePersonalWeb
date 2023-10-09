@@ -17,6 +17,8 @@ public class WebConfiguration implements WebMvcConfigurer {
         registry
                 .addInterceptor(interceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/api/auth/**");
+                .excludePathPatterns("/api/auth/**")
+                .excludePathPatterns("/api/image/**")
+                .excludePathPatterns("/upload-image");
     }
 }

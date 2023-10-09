@@ -5,18 +5,18 @@ import {get, post} from "@/net/index.js";
 import {reactive, ref, nextTick} from 'vue';
 import router from "@/router";
 import {useStore} from "@/stores";
+const store = useStore();
 const form = reactive({
   username:'',
   password: '',
   remember: false
 })
 
-const store = useStore();
 const login = () =>{
   if(!form.username || !form.password){
     ElMessage.warning('Please Enter the password or username')
   }else {
-    post('/api/image/login', {
+    post('/api/auth/login', {
       username: form.username,
       password: form.password,
       remember: form.remember,
@@ -24,6 +24,7 @@ const login = () =>{
       ElMessage.success(message)
       get('api/user/me', (message) => {
         store.auth.user = message
+        console.log(store.auth.user)
         router.push('/')
       },() => {
         store.auth.user = null

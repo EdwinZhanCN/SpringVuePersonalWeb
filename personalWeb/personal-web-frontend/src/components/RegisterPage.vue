@@ -111,7 +111,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
   formEl.validate((valid) => {
     if (valid) {
       console.log('submit!')
-      post('/api/image/register', {
+      post('/api/auth/register', {
         username: ruleForm.username,
         password: ruleForm.pass,
         email: ruleForm.email,
@@ -135,7 +135,7 @@ const resetForm = (formEl: FormInstance | undefined) => {
 
 const validateEmail = () =>{
   cool.value = 60
-  post('/api/image/valid-email', {
+  post('/api/auth/valid-email', {
     email: ruleForm.email,
     isResettingPassword: isResettingPassword.value
   }, (message)=>{

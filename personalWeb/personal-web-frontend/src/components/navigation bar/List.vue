@@ -50,6 +50,7 @@ a{
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .list-item{
+  font-family: "Helvetica Neue",serif;
   width: 10rem;
   cursor: pointer;
   text-align: center;
