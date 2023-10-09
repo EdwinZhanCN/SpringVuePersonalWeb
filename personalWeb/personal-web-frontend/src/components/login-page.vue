@@ -16,7 +16,7 @@ const login = () =>{
   if(!form.username || !form.password){
     ElMessage.warning('Please Enter the password or username')
   }else {
-    post('/api/auth/login', {
+    post('/api/image/login', {
       username: form.username,
       password: form.password,
       remember: form.remember,

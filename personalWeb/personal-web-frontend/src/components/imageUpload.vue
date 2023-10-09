@@ -1,13 +1,24 @@
 <template>
   <div>
-    <!-- 文件上传 -->
-    <input type="file" ref="fileInput" />
-    <input type="text" v-model="description" placeholder="Description" />
-    <button @click="uploadFile">Upload</button>
+    <h2>图片上传</h2>
+    <form @submit.prevent="uploadImage">
+      <label>选择图片:
+        <input type="file" ref="fileInput" required>
+      </label>
+      <br><br>
+      <label>图片描述:
+        <textarea v-model="description" rows="4" cols="50"></textarea>
+      </label>
+      <br><br>
+      <button type="submit">上传</button>
+    </form>
   </div>
 </template>
 
 <script>
+import {post} from "@/net";
+import {ElMessage} from "element-plus";
+
 export default {
   data() {
     return {
@@ -15,35 +26,21 @@ export default {
     };
   },
   methods: {
-    async uploadFile() {
-      const file = this.$refs.fileInput.files[0];
-      if (file && this.description) {
-        const formData = new FormData();
-        formData.append('file', file);
+    uploadImage() {
+      const formData = new FormData();
+      const fileInput = this.$refs.fileInput;
+
+      if (fileInput.files.length > 0) {
+        formData.append('file', fileInput.files[0]);
         formData.append('description', this.description);
-
-        try {
-          const response = await fetch('/api/images', {
-            method: 'POST',
-            body: formData,
-          });
-
-          if (!response.ok) {
-            throw new Error(`Upload failed: ${response.statusText}`);
-          }
-
-          const image = await response.json();
-          console.log('File uploaded:', image);
-
-          alert('File uploaded successfully!');
-
-        } catch (error) {
-          console.error(error.message);
-        }
-      } else {
-        alert('Please select a file and enter a description.');
+        post('/api/image/upload', formData, (message) => {
+          ElMessage.success(message)
+        })
+      }else {
+        ElMessage.warning("please select image")
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
+

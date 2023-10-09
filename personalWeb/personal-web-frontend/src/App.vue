@@ -9,7 +9,7 @@ const store = useStore()
 if(store.auth.user == null){
   get('api/user/me', (message)=> {
     store.auth.user = message
-    router.push("/")
+    router.push("/album-gallery")
   },()=>{
     store.auth.user = null
   })

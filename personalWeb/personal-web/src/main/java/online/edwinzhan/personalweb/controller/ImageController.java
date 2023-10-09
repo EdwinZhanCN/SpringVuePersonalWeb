@@ -1,28 +1,25 @@
 package online.edwinzhan.personalweb.controller;
 
+import jakarta.annotation.Resource;
 import online.edwinzhan.personalweb.entity.Image;
+import online.edwinzhan.personalweb.entity.RestBean;
 import online.edwinzhan.personalweb.service.ImageService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
-import java.net.URI;
 import java.time.LocalDateTime;
 
 @RestController
-@RequestMapping("api/images")
+@RequestMapping("api/image")
 public class ImageController {
-    @Autowired
-    private ImageService imageService;
+    @Resource
+    ImageService imageService;
 
-    @PostMapping
+    @PostMapping("/upload")
     public ResponseEntity<Image> uploadImage(
-            @RequestParam("file") MultipartFile file,
-            @RequestParam("description") String description) throws IOException {
+            @RequestParam("file") MultipartFile file, String description) throws IOException {
         Image image = new Image();
         image.setFilename(file.getOriginalFilename());
         image.setFileData(file.getBytes());
@@ -32,12 +29,14 @@ public class ImageController {
         return ResponseEntity.ok(savedImage);
     }
 
-    @GetMapping("/download/{id}")
-    public ResponseEntity<byte[]> downloadImage(@PathVariable Long id) {
-        Image image = imageService.getImageById(id);
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + image.getFilename() + "\"")
-                .body(image.getFileData());
+    @GetMapping("/{id}")
+    public RestBean<byte[]> getImage( @PathVariable Long id){
+        byte[] wrongMessage = {40,4};
+        byte[] image = imageService.getImageById(id);
+        if(image != null){
+            return RestBean.success(image);
+        }
+        return RestBean.failure(404,wrongMessage);
     }
 }
 

@@ -18,8 +18,11 @@ public class Image {
     private Long id;
     private String filename;
     private String description;
+
     @Lob
+    @Column(columnDefinition="MEDIUMBLOB")
     private byte[] fileData;
+
     private LocalDateTime uploadTime;
 
 }
