@@ -1,17 +1,20 @@
 <template>
-  <div style="height: 100vh; overflow: hidden">
-    <navigation-bar style="margin-top: 20px"></navigation-bar>
+  <div style="background-color: rgb(229,229,234);">
+    <navigation-bar></navigation-bar>
     <div class = "album-view">
       <h1>
-        Love songs, love pop.
+        Love songs,   love pop.
       </h1>
       <scroll/>
       <button @click = "login()" class="button">
         <el-icon size="large" ><ArrowRightBold /></el-icon>
       </button>
-      <div  id = "text-container" class="text-container">
+      <div id = "text-container" class="text-container">
           Listen my playlist
       </div>
+    </div>
+    <div class = "visual-cliff">
+      <visual-cliff/>
     </div>
   </div>
 
@@ -22,6 +25,10 @@
   import scroll from "@/components/scroll.vue";
   import {ArrowRightBold} from "@element-plus/icons-vue";
   import router from "@/router";
+  import VisualCliff from "@/components/visual-cliff.vue";
+  import ScrollSkeleton from "@/components/scroll-skeleton.vue";
+  import VueLazyComponent from '@xunlei/vue-lazy-component'
+
   const login = () =>{
     router.push('/login')
   }
@@ -94,6 +101,11 @@
   transition: 0.4s ease-in-out;
   width: 220px;
   opacity: 1;
+}
+
+.visual-cliff{
+  position: static;
+  height: auto;
 }
 
 

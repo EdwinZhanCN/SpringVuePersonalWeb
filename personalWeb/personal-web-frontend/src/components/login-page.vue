@@ -25,7 +25,7 @@ const login = () =>{
       get('api/user/me', (message) => {
         store.auth.user = message
         console.log(store.auth.user)
-        router.push('/')
+        router.push('/idea')
       },() => {
         store.auth.user = null
       })

@@ -25,6 +25,7 @@ export default defineComponent({
 }
 @media screen and (min-width: 980px) {
   .navigation {
+    padding-top: 20px;
     padding-left: 53px;
     padding-right: 53px;
     max-width: 957px;

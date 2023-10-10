@@ -6,9 +6,14 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
-            path: '/',
-            name:'start',
+            path: '/idea',
+            name:'idea',
             component: () => import("@/idea.vue"),
+        },
+        {
+            path: '/',
+            name:'main',
+            component: () => import("@/main.vue"),
         },
         {
             path:'/login',
@@ -62,13 +67,13 @@ router.beforeEach(async (to, from, next) => {
     }
 
     if (store.auth.user != null && to.fullPath.startsWith('/login')) {
-        next('/');
+        next('/idea');
         console.log(store.auth.user);
     } else if (store.auth.user == null && to.fullPath.startsWith("/upload-image")) {
         next('/login');
         console.log(store.auth.user);
     } else if (to.matched.length === 0) {
-        next("/");
+        next("/idea");
         console.log(store.auth.user);
     } else {
         next();
