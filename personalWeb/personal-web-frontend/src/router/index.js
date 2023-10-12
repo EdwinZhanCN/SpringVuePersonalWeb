@@ -40,6 +40,11 @@ const router = createRouter({
             name:'upload-image',
             component: () => import('@/components/upload-image.vue')
         },
+        {
+            path:'/music-player',
+            name:'music-player',
+            component: () => import('@/player-frame.vue')
+        }
 
     ]
 

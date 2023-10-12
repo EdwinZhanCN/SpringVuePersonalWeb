@@ -9,12 +9,12 @@ export default {
     <p>My favorite Photographer: LinksPhotograph</p>
     <div class = "link-container">
       <a class = "link-style" href="https://www.youtube.com/channel/UCz0ONCn6eRcDJGsUzupc3TA" >
-           See films from @linksphotograph on YouTube"
+        See films from @linksphotograph on YouTube"
         <div class = "svg-container">
           <svg  xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
             <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8
-            224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5
-            32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
+          224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5
+          32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
         </div>
       </a>
     </div>
@@ -22,14 +22,22 @@ export default {
   <div class="parallax p1">
   </div>
   <div class="content" style="background-color: #2c3e50;"><p>The mystery of creation is like the darkness of night--it is great.
-    Delusions of knowledge are like the fog of the morning.</p><p>This longing is for the one who is felt in the dark, but not seen
-
+    Delusions of knowledge are like the fog of the morning.</p>
+    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/oAIBHmeuKyQ?si=b3rBX1_7e_uKnwTR"
+            title="YouTube video player" frameborder="0" allow="accelerometer;
+            autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+    </iframe>
+    <p>This longing is for the one who is felt in the dark, but not seen
     in the day.</p></div>
   <div class="parallax p2"></div>
   <div class="content" style="background-color: #6880a6"><p>
     In darkness the One appears as uniform; in the light the One appears
     as manifold.
-  </p><p>
+  </p><iframe width="100%" height="100%" src="https://www.youtube.com/embed/rGmoljGmKPI?si=rmcX1zGGce6GaUHl"
+              title="YouTube video player" frameborder="0" allow="accelerometer;
+              autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;
+              web-share" allowfullscreen>
+  </iframe><p>
     The birth and death of the leaves are the rapid whirls of the eddy
     whose wider circles move slowly among stars.
   </p></div>
@@ -39,7 +47,10 @@ export default {
     We, the rustling leaves, have a voice that answers the storms,
     but who are you so silent?"
     I am a mere flower.
-  </p><p style="color: #c89263">
+  </p><iframe width="100%" height="90%" src="https://www.youtube.com/embed/4pIJluV19HY?si=hkNjTLGsKDUpQn-1"
+              title="YouTube video player" frameborder="0" allow="accelerometer;
+              autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+  </iframe><p style="color: #c89263">
     Tonight there is a stir among the palm leaves, a swell in the sea,
     Full Moon, like the heart throb of the world. From what unknown sky hast
     thou carried in thy silence the aching secret of love?
@@ -149,8 +160,8 @@ display: none;
   height: 30vh;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 600px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
   text-align: center;
 
 }
@@ -162,4 +173,5 @@ display: none;
   font-weight: bold;
   padding-top: 15%;
 }
+
 </style>

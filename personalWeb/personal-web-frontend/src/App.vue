@@ -1,10 +1,8 @@
 <script setup>
 
 import {get} from "@/net/index.js"
-import {ElMessage} from "element-plus"
 import {useStore} from "@/stores";
-import router from "@/router";
-import VisualCliff from "@/components/visual-cliff.vue";
+import Comments from "@/components/comments.vue";
 const store = useStore()
 
 if(store.auth.user == null){
@@ -20,7 +18,7 @@ if(store.auth.user == null){
 </script>
 
 <template>
-  <router-view></router-view>
+<router-view/>
 </template>
 
 <style>

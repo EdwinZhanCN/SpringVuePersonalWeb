@@ -6,7 +6,7 @@
         Love songs,   love pop.
       </h1>
       <scroll/>
-      <button @click = "login()" class="button">
+      <button @click = toMusic() class="button">
         <el-icon size="large" ><ArrowRightBold /></el-icon>
       </button>
       <div id = "text-container" class="text-container">
@@ -26,11 +26,9 @@
   import {ArrowRightBold} from "@element-plus/icons-vue";
   import router from "@/router";
   import VisualCliff from "@/components/visual-cliff.vue";
-  import ScrollSkeleton from "@/components/scroll-skeleton.vue";
-  import VueLazyComponent from '@xunlei/vue-lazy-component'
 
-  const login = () =>{
-    router.push('/login')
+  const toMusic = () =>{
+    router.push('/music-player')
   }
 
 </script>
