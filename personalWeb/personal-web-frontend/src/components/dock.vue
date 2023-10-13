@@ -2,11 +2,6 @@
 import {ref} from "vue";
 
 const items  =ref([
-  {name: "枫", url: "/src/components/album-cover/1400x1400bb-3.jpg"},
-  {name: "Think out loud", url: "/src/components/album-cover/1400x1400bb-4.jpg" },
-  {name: "枫", url: "/src/components/album-cover/1400x1400bb-3.jpg"},
-  {name: "Think out loud", url: "/src/components/album-cover/1400x1400bb-4.jpg" },
-  {name: "枫", url: "/src/components/album-cover/1400x1400bb-3.jpg"},
 
 ])
 </script>

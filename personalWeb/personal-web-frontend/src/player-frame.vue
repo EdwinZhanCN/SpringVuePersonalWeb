@@ -2,6 +2,8 @@
 import {ref} from "vue";
 import {Document, Location, Setting} from "@element-plus/icons-vue";
 import Dock from "@/components/dock.vue";
+import axios from "axios";
+
 export default {
   name:"player-frame",
   components: {Dock, Setting, Document, Location},
@@ -9,53 +11,70 @@ export default {
     const customColor = ref("background: gray")
     const magicNumber = ref(0);
     const activeIndex = ref(0);
-    const lyrics = ref([
-      "dsadsadbhjbashjdbhabdhsavdasgyggyb",
-      "dsadsadbhjbashjdbvyggyb",
-      "dsadsadbhjbashjdbhabdhsavdasgyugyuvgycvyggyb",
-      "dsadsadbhjbashjdbhabdhsavdasgyucvyggyb",
-      "dsadsadbhjbashjdbhabdhsavdasgyugyuvgycvyggyb",
-      "dsadsadbhjbashjdbhasgyugyuvgycvyggyb",
-      "dsadsadbhjbashjdbhabdhsavdb",
-      "dsadsadbhjbashjdbhabdggyb",
-      "dsadsadbhjbashjdbhabdhsacvyggyb",
-      "dsadsadbhjbashjdbhabdhsavyugyuvgycvyggyb",
-      "dsadsadbhjgyugyuvgycvyggyb",
-      "dsadsadbhjbashjdasgyugyuvgycvyggyb",
-      "dsadsadbhjbashjdbhabdgycvyggyb",
-      "dsadsadbhjbashjdbyggyb",
-      "dsadsadbhjbashjdbhabdhsavdagycvyggyb",
-      "dsadsadbhjbashjdbhabdhscvyggyb",
-      "dsadsadbhjbgyugyuvgycvyggyb",
-      "dsadsadbhjbashjdbhabdcvyggyb",
-      "dsadsadbhjbashjdbhabdhsavdasgyuyggyb",
-      "dsadsadbhjbashyuvgycvyggyb",
-      "dsadsadbhjbashjdbhabdvgycvyggyb",
-      "dsadsadbhjbashjdbhabdhsavggyb",
-      "dsadsadbhjbasdasgyugyuvgycvyggyb",
-      "dsadsadbhjbashjdbhabdhsavdasgyugyuvgycvyggyb",
-      "dsadsadbhjbashjdyugyuvgycvyggyb",
-      "dsadsadbhjbashjdbhabdhsavdasyggyb",
-      "dsadsadbhjbashjdbhabdhsavdasgyvyggyb",
-      "dsadsadbhjbashjdbhabduvgycvyggyb",
-      "dsadsadbhjbashjdbhabgyugyuvgycvyggyb",
-      "dsadsadbhjbashjdbhabdhsavdasgycvyggyb",
-      "dsadsadbhjbashjdbhabdhsavdasgyugyuvgycvyb",
-      "dsadsadbhjbashjdbhabdhsvgycvyggyb",
-      "dsadsadbhjbashjdbhabdhsavdasgyugyuvgycvyggyb",
-      "dsadsadbhjbashjdbhagyuvgycvyggyb",
-      //... repeat for other lines
-    ]);
+    const lyrics = ref([]);
+
+    const parseLrcTime = (timestamp) => {
+      const regex = /\[(\d{2}):(\d{2})(?::(\d{2,3}))?\]/;
+      const matches = timestamp.match(regex);
+      if (!matches) return null;
+
+      const minutes = parseInt(matches[1], 10);
+      const seconds = parseInt(matches[2], 10);
+      let milliseconds = matches[3] ? parseInt(matches[3], 10) : 0;
+
+      if (matches[3] && matches[3].length === 2) {
+        milliseconds *= 10;
+      }
+
+      return (minutes * 60 * 1000) + (seconds * 1000) + milliseconds;
+    };
+
+    import axios from 'axios';
+
+    const fetchAndParseLyrics = async (id) => {
+      try {
+        // 使用 axios.get 并确保响应为文本格式
+        const response = await axios.get(`/lyric/lyric${id}.lrc`, { responseType: 'text' });
+        const lines = response.data.split('\n');
+
+        lines.forEach(line => {
+          const timestampMatches = line.match(/\[(\d{2}:\d{2}(?:[:\d{2,3}])?)\]/g);
+          const text = line.replace(/\[\d{2}:\d{2}(?:[:\d{2,3}])?\]/g, '').trim();
+
+          console.log(line);  // Log entire line
+
+          if (timestampMatches) {
+            console.log("Timestamps found:", timestampMatches);
+            timestampMatches.forEach(timestamp => {
+              const time = parseLrcTime(timestamp);
+              if (time !== null) {
+                console.log("Parsed time:", time);
+
+                lyrics.value.push({
+                  time,
+                  text
+                });
+              }
+            });
+          }
+        });
+      } catch (error) {
+        console.error("Error fetching or parsing LRC file:", error);
+      }
+    };
 
     const scrollLyrics = () => {
       magicNumber.value--;
       activeIndex.value++;
     };
+    fetchAndParseLyrics(2)
+
     return{customColor,
       activeIndex,
       magicNumber,
       lyrics,
-      scrollLyrics}
+      scrollLyrics,
+      fetchAndParseLyrics}
   }
 }
 
@@ -123,7 +142,7 @@ export default {
               <font-awesome-icon :icon="['fas', 'backward']" style="color: #000000; padding: 10px 0 10px 0; width: 30px; height: 30px;" />
               <svg viewBox="0 0 32 28" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.345 23.287c.415 0 .763-.15 1.22-.407l12.742-7.404c.838-.481 1.178-.855 1.178-1.46 0-.599-.34-.972-1.178-1.462L11.565 5.158c-.457-.265-.805-.407-1.22-.407-.789 0-1.345.606-1.345 1.57V21.71c0 .971.556 1.577 1.345 1.577z" fill-rule="nonzero"/></svg>
-              <font-awesome-icon icon="forward" style="color: #000000; padding: 10px 0 10px 0;width: 30px; height: 30px;" />
+              <font-awesome-icon icon="forward" style="color: #000000; padding: 10px 0 10px 0;width: 30px; height: 30px; cursor: pointer" />
             </div>
             <font-awesome-icon icon="repeat" style="color: #000000; width: 30px; height: 30px;" />
           </div>
@@ -209,7 +228,6 @@ svg{
   border-radius: 10px;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url("components/album-cover/1400x1400bb-3.jpg");
 }
 
 .top{
