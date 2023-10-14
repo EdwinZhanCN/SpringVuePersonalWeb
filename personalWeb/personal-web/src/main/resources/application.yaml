@@ -29,6 +29,10 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+  azure:
+    storage:
+      connection-string: DefaultEndpointsProtocol=https;AccountName=edwinzhan;AccountKey=PacvWriDCVYmFze/WEnxsfxLQhuacHnjg8ITz0rpU8pmHPVd0JhmLQ4cIQOFfq6NABqe8/rIfUKp+AStdnH9aw==;EndpointSuffix=core.windows.net
+      container-name: web-app
 #logging:
 #  level:
 #    root: DEBUG

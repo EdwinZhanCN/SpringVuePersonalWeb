@@ -32,7 +32,6 @@ public class AuthorizeController {
         else
             return RestBean.failure(400, s);
     }
-
     @PostMapping("/register")
     public RestBean<String> registerUser(@Pattern(regexp = username_regex) @RequestParam("username") String username,
                                          @RequestParam("password") String password,

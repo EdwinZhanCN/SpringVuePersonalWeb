@@ -26,4 +26,7 @@ public class RestBean<T> {
     public static <T> RestBean<T> failure(int status, T data){
         return new RestBean<>(status, false, data);
     }
+    public static <T> RestBean<T> failure(){
+        return new RestBean<>(200, false, null);
+    }
 }

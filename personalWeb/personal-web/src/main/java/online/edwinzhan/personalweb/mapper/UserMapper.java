@@ -21,6 +21,4 @@ public interface UserMapper {
     @Update("update db_account set password = #{password} where email = #{email}")
     int resetPasswordByEmail(String password, String email);
 
-
-
 }
