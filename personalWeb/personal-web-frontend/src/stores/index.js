@@ -4,8 +4,8 @@ export const useStore = defineStore('store', () => {
    const auth = reactive({
        user: null
    })
-    const images = reactive({
-        image: []
+    const isCache = reactive({
+        isCache: false
     })
-    return {auth, images}
+    return {auth, isCache}
 })

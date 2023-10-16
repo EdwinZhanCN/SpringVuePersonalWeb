@@ -26,7 +26,6 @@
   import {ArrowRightBold} from "@element-plus/icons-vue";
   import router from "@/router";
   import VisualCliff from "@/components/visual-cliff.vue";
-
   const toMusic = () =>{
     router.push('/music-player')
   }

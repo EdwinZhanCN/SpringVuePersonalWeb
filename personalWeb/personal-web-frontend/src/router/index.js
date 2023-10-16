@@ -44,8 +44,11 @@ const router = createRouter({
             path:'/music-player',
             name:'music-player',
             component: () => import('@/player-frame.vue')
+        },
+        {
+            path: '/blog',
+            beforeEnter() { window.location.href = '/docs' }
         }
-
     ]
 
 })

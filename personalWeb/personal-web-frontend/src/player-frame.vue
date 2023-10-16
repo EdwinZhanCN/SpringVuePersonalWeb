@@ -2,7 +2,6 @@
 import {ref} from "vue";
 import {Document, Location, Setting} from "@element-plus/icons-vue";
 import Dock from "@/components/dock.vue";
-import axios from "axios";
 
 export default {
   name:"player-frame",
@@ -28,8 +27,6 @@ export default {
 
       return (minutes * 60 * 1000) + (seconds * 1000) + milliseconds;
     };
-
-    import axios from 'axios';
 
     const fetchAndParseLyrics = async (id) => {
       try {

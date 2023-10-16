@@ -59,7 +59,6 @@ export default {
       "dsadsadbhjbashjdbhabdhsavdasgyugyuvgycvyggyb",
       "dsadsadbhjbashjdbhabdhsavdasgyugyuvgycvyggyb",
       "dsadsadbhjbashjdbhabdhsavdasgyugyuvgycvyggyb",
-      //... repeat for other lines
     ]);
 
     const scrollLyrics = () => {

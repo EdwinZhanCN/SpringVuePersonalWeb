@@ -4,25 +4,25 @@
         :list="images1"
         class="scroll"
         direction = "left"
-        step = "0.6"
+        step = 0.6
     >
-      <img v-for="image in images1" :key="image" :src="image" alt="database-image"/>
+      <img v-show= "response" v-for="image in images1" :key="image" :src="image" alt="database-image"/>
     </vue3-seamless-scroll>
     <vue3-seamless-scroll
         :list="images2"
         class="scroll"
         direction = "left"
-        step = "0.8"
+        step = 0.8
     >
-      <img v-for="image in images2" :key="image" :src="image" alt="database-image"/>
+      <img v-show= "response" v-for="image in images2" :key="image" :src="image" alt="database-image"/>
     </vue3-seamless-scroll>
     <vue3-seamless-scroll
         :list="images3"
         class="scroll"
         direction = "left"
-        step = "0.7"
+        step = 0.7
     >
-      <img v-for="image in images3" :key="image" :src="image" alt="database-image"/>
+      <img v-show= "response" v-for="image in images3" :key="image" :src="image" alt="database-image"/>
     </vue3-seamless-scroll>
   </div>
 </template>
@@ -39,28 +39,34 @@ export default defineComponent({
     Vue3SeamlessScroll
   },
   setup() {
+    const response = ref(false)
+
     const images1 = ref([])
     const images2 = ref([])
     const images3 = ref([])
-
-    for (let i = 1; i <= 41; i++) {
-      get(`api/image/${i}`, (data) => {
-        if (data) {
-          if (i > 13 && i <= 28) {
-            images2.value.push('data:image/jpeg;base64,' + data);
-          } else if (i > 28 && i <= 41) {
-            images3.value.push('data:image/jpeg;base64,' + data);
-          } else {
-            images1.value.push('data:image/jpeg;base64,' + data);
+    const fetchImage = () =>{
+      for (let i = 1; i <= 41; i++) {
+        get(`api/image/${i}`, (data) => {
+          if (data) {
+            if (i > 13 && i <= 28) {
+              images2.value.push('data:image/jpeg;base64,' + data);
+            } else if (i > 28 && i <= 41) {
+              images3.value.push('data:image/jpeg;base64,' + data);
+            } else {
+              images1.value.push('data:image/jpeg;base64,' + data);
+            }
+          }else{
+            ElMessage.warning(`Failed to decode the image with id: ${i}`);
           }
-        }else{
-          ElMessage.warning(`Failed to decode the image with id: ${i}`);
-        }
-      },()=>{
-        console.log("can't find image: ${i}");
-      });
+        },()=>{
+          console.log("can't find image: ${i}");
+        });
+      }
     }
-    return { images1, images2, images3 };
+
+    fetchImage();
+    response.value = true;
+    return { images1, images2, images3, response};
   },
 });
 </script>
@@ -74,6 +80,7 @@ export default defineComponent({
   margin: 0 auto;
   overflow: hidden;
   background: black;
+
 }
 
 .scroll img{
@@ -90,5 +97,15 @@ export default defineComponent({
   grid-gap: 10px;
   margin-top: 20px;
   margin-bottom: 20px;
+  animation: trans 8s ease-in-out;
+}
+
+@keyframes trans {
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
 }
 </style>

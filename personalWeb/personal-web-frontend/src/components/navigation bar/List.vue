@@ -22,7 +22,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 a{
   font-size: 18px;
   line-height: 3em;
@@ -48,6 +48,8 @@ a{
   background-color: rgb(242,242,247);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+
 .list-item{
   font-family: "Futura",sans-serif;
   width: 10rem;

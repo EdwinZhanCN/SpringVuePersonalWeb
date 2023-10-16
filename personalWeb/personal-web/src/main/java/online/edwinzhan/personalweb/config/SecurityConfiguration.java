@@ -66,8 +66,7 @@ public class SecurityConfiguration{
                                 .tokenValiditySeconds(3600*24*7)//7 days
                 )
                 .userDetailsService(authorizeService)
-                .csrf(AbstractHttpConfigurer::disable
-                )
+                .csrf(AbstractHttpConfigurer::disable)
                 .cors(corsSpec -> corsSpec.configurationSource(this.corsConfigurationSource()))
                 .build();
     }

@@ -1,5 +1,6 @@
 package online.edwinzhan.personalweb.controller;
 
+import jakarta.annotation.Resource;
 import online.edwinzhan.personalweb.entity.RestBean;
 import online.edwinzhan.personalweb.entity.Song;
 import online.edwinzhan.personalweb.service.SongService;
@@ -12,7 +13,7 @@ import java.util.List;
 @RestController
 public class SongController {
 
-    @Autowired
+    @Resource
     private SongService songService;
 
     @GetMapping("/songs")
