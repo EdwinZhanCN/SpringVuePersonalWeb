@@ -24,6 +24,9 @@ export default defineConfig({
         items: [
           { text: 'Introduction', link: '/personal-website-tutorial-about' },
           { text: 'Start with Azure', link: '/Start-with-Azure' },
+          { text: 'Connect to Virtual Machine', link: '/Connect-to-Virtual-Machine' },
+          { text: 'Setup Nginx', link: '/Nginx-Setup' },
+          { text: 'Setup Domain name', link: '/Domain-name-setup' },
         ],
       },
       {
