@@ -43,6 +43,7 @@ public class SecurityConfiguration{
                         authorizeRequests
                                 .requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers("/api/image/**").permitAll()
+                                .requestMatchers("/api/songs/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->

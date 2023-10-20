@@ -19,6 +19,7 @@ public class WebConfiguration implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/api/auth/**")
                 .excludePathPatterns("/api/image/**")
-                .excludePathPatterns("/upload-image");
+                .excludePathPatterns("/upload-image")
+                .excludePathPatterns("/api/songs/**");
     }
 }

@@ -14,11 +14,7 @@ public class SongService {
     private SongRepository songRepository;
 
     public List<Song> findAllSongs() throws Exception {
-        try{
-            return songRepository.findAllSongs();
-        } catch (Exception e) {
-            throw new Exception("Failed to get songs");
-        }
+        return songRepository.findAllSongs();
     }
 }
 

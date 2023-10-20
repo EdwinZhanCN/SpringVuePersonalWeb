@@ -2,6 +2,7 @@
 import {ref} from "vue";
 import {Document, Location, Setting} from "@element-plus/icons-vue";
 import Dock from "@/components/dock.vue";
+import {get} from "@/net";
 
 export default {
   name:"player-frame",
@@ -10,74 +11,131 @@ export default {
     const customColor = ref("background: gray")
     const magicNumber = ref(0);
     const activeIndex = ref(0);
-    const lyrics = ref([]);
+    const songInfo = ref([{}]);//artist:"", genre:"", title:"", url:"", lrc: ""
+    const currentSongLyric = ref([{time:"0", lyric:"请欣赏"}]);
+    const audioRef = ref(null);
 
-    const parseLrcTime = (timestamp) => {
-      const regex = /\[(\d{2}):(\d{2})(?::(\d{2,3}))?\]/;
-      const matches = timestamp.match(regex);
-      if (!matches) return null;
+    function timestampToMilliseconds(timestamp) {
+      const pattern1 = /(\d{2}):(\d{2})\.(\d{3})/;  // [00:00.000]
+      const pattern2 = /(\d{2}):(\d{2})\.(\d{2})/;  // [00:00.00]
+      const pattern3 = /(\d{2}):(\d{2})/;           // [00:00]
 
-      const minutes = parseInt(matches[1], 10);
-      const seconds = parseInt(matches[2], 10);
-      let milliseconds = matches[3] ? parseInt(matches[3], 10) : 0;
+      let result;
 
-      if (matches[3] && matches[3].length === 2) {
-        milliseconds *= 10;
+      if ((result = pattern1.exec(timestamp))) {
+        return Number(result[1]) * 60 * 1000 + Number(result[2]) * 1000 + Number(result[3]);
+      } else if ((result = pattern2.exec(timestamp))) {
+        return Number(result[1]) * 60 * 1000 + Number(result[2]) * 1000 + Number(result[3]) * 10;
+      } else if ((result = pattern3.exec(timestamp))) {
+        return Number(result[1]) * 60 * 1000 + Number(result[2]) * 1000;
+      } else {
+        console.log("时间戳解析失败！");  // 修正了 console 的调用，添加了 log 方法
+        return -1;  // 无法匹配的时间戳格式
       }
+    }
 
-      return (minutes * 60 * 1000) + (seconds * 1000) + milliseconds;
-    };
-
-    const fetchAndParseLyrics = async (id) => {
-      try {
-        // 使用 axios.get 并确保响应为文本格式
-        const response = await axios.get(`/lyric/lyric${id}.lrc`, { responseType: 'text' });
-        const lines = response.data.split('\n');
-
-        lines.forEach(line => {
-          const timestampMatches = line.match(/\[(\d{2}:\d{2}(?:[:\d{2,3}])?)\]/g);
-          const text = line.replace(/\[\d{2}:\d{2}(?:[:\d{2,3}])?\]/g, '').trim();
-
-          console.log(line);  // Log entire line
-
-          if (timestampMatches) {
-            console.log("Timestamps found:", timestampMatches);
-            timestampMatches.forEach(timestamp => {
-              const time = parseLrcTime(timestamp);
-              if (time !== null) {
-                console.log("Parsed time:", time);
-
-                lyrics.value.push({
-                  time,
-                  text
-                });
-              }
+    function processLyrics(lyrics) {
+      const lines = lyrics.split('\n');
+      for (let line of lines) {
+        const pattern = /\[(\d{2}:\d{2}(?:\.\d{2,3})?)\](.+)/;  // 更新了正则表达式以匹配新的时间戳格式
+        const match = pattern.exec(line);
+        if (match && match[1] && match[2]) {  // 更新了数组索引以匹配新的正则表达式
+          const time = timestampToMilliseconds(match[1]);
+          const lyric = match[2].trim();  // 更新了数组索引以匹配新的正则表达式
+          if (time !== -1) {
+            currentSongLyric.value.push({
+              time,
+              lyric,
             });
           }
-        });
+        }
+      }
+    }
+
+
+
+    const fetchSongs = (callback) => {
+      get('/api/songs/get',
+          (message) => {  // success回调
+            songInfo.value = message.map(song => ({  // 假设message直接返回歌曲数组
+              artist: song.artist,
+              genre: song.genre,
+              title: song.title,
+              url: song.blobUrl,
+              lrc: song.lrcUrl
+            }));
+            if (callback) callback();
+          },
+          (errorMessage, status) => {  // failure回调
+            console.error(`Error with status ${status}: ${errorMessage}`);
+          },
+          (error) => {  // axios catch回调
+            console.error('Axios error:', error);
+          }
+      );
+    }
+
+
+
+    const fetchLyrics = async (url) => {
+      try {
+        const response = await fetch(url);
+        if (response.ok) {
+          const text = await response.text();
+          console.log("success")
+          processLyrics(text)
+        } else {
+          console.error('Failed to fetch lyrics:', response.statusText);
+        }
       } catch (error) {
-        console.error("Error fetching or parsing LRC file:", error);
+        console.error('Error fetching lyrics:', error);
       }
     };
+
+    fetchSongs(() => {
+      console.log(songInfo.value[0])
+      fetchLyrics(songInfo.value[0].lrc)
+    });
 
     const scrollLyrics = () => {
       magicNumber.value--;
       activeIndex.value++;
     };
-    fetchAndParseLyrics(2)
 
-    return{customColor,
+    const togglePlay = () => {
+      const video = audioRef.value;
+      if (video.paused) {
+        video.play();
+      } else {
+        video.pause();
+      }
+    }
+
+    return {
+      customColor,
       activeIndex,
       magicNumber,
-      lyrics,
+      currentSongLyric,
       scrollLyrics,
-      fetchAndParseLyrics}
+      songInfo,
+      togglePlay,
+      audioRef
+    }
   }
 }
 
 </script>
 
 <template>
+  <video v-if = "songInfo.length > 0"
+         preload="auto"
+         controls
+         autoplay
+         width="20"
+         height="20"
+         :src = songInfo[0].url
+          >
+  </video>
   <div class="background" :style= customColor>
     <div class="player-background">
       <div class = "interface-manager">
@@ -116,6 +174,7 @@ export default {
                   <font-awesome-icon :icon="['fas', 'star-half-stroke']" />
                   <font-awesome-icon :icon="['far', 'star']" />
                 </div>
+                <button @click = scrollLyrics()> 滚动</button>
                 <font-awesome-icon icon="comments" style="width: 30px; height: 30px;"/>
               </div>
               <div class="album-cover">
@@ -123,12 +182,12 @@ export default {
             </div>
             <div class="lyrics">
               <div class="scroll-view">
-                <p v-for="(lyric, index) in lyrics" :key="index"
+                <p v-for="(lyric, index) in currentSongLyric" :key="index"
                    :class="{ 'active': index === activeIndex, 'blur': index < activeIndex, 'blur': index > activeIndex}"
                    :style="{ '--i': index,
                     '--active-index': activeIndex,
                     top: (index + magicNumber) * 4 + 'em'}">
-                  {{ lyric }}
+                  {{ lyric.lyric }}
                 </p>
               </div>
             </div>
@@ -136,7 +195,7 @@ export default {
           <div class="bottom">
             <font-awesome-icon icon="shuffle" style="color: #000000; width: 30px; height: 30px;" />
             <div style="display:flex; justify-content: center; width: 30%">
-              <font-awesome-icon :icon="['fas', 'backward']" style="color: #000000; padding: 10px 0 10px 0; width: 30px; height: 30px;" />
+              <font-awesome-icon :icon="['fas', 'backward']" style="color: #000000; padding: 10px 0 10px 0; width: 30px; height: 30px; cursor: pointer" />
               <svg viewBox="0 0 32 28" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.345 23.287c.415 0 .763-.15 1.22-.407l12.742-7.404c.838-.481 1.178-.855 1.178-1.46 0-.599-.34-.972-1.178-1.462L11.565 5.158c-.457-.265-.805-.407-1.22-.407-.789 0-1.345.606-1.345 1.57V21.71c0 .971.556 1.577 1.345 1.577z" fill-rule="nonzero"/></svg>
               <font-awesome-icon icon="forward" style="color: #000000; padding: 10px 0 10px 0;width: 30px; height: 30px; cursor: pointer" />
@@ -270,7 +329,7 @@ p {
   font-family: Helvetica,serif;
   font-weight: bold;
   text-align: start;
-  font-size: 40px;
+  font-size: 35px;
   word-wrap: break-word;
   line-height: 40px;
   width: 80%;

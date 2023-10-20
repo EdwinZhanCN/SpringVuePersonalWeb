@@ -4,6 +4,7 @@ import com.azure.storage.blob.BlobContainerClient;
 import com.azure.storage.blob.BlobContainerClientBuilder;
 import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.BlobServiceClientBuilder;
+import com.azure.storage.blob.models.BlobItem;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +17,6 @@ public class AzureStorageConfig {
 
     @Value("${spring.azure.storage.container-name}")
     private String containerName;
-
     @Bean
     public BlobContainerClient blobContainerClient() {
         return new BlobContainerClientBuilder()
@@ -24,7 +24,5 @@ public class AzureStorageConfig {
                 .containerName(containerName)
                 .buildClient();
     }
-
-
 }
 
