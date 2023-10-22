@@ -27,7 +27,8 @@ export default defineConfig({
           { text: 'Connect to Virtual Machine', link: '/Connect-to-Virtual-Machine' },
           { text: 'Setup Nginx', link: '/Nginx-Setup' },
           { text: 'Setup Domain name', link: '/Domain-name-setup' },
-          { text: 'Setup SSL-Certificate (Optional)', link: '/SSL-Certificate-Setup'}
+          { text: 'Setup SSL-Certificate (Optional)', link: '/SSL-Certificate-Setup'},
+          { text: 'First HTML page!', link: '/First HTML page!'}
         ],
       },
       {
