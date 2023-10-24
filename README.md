@@ -18,3 +18,8 @@ https://www.bilibili.com/video/BV1rT411W7QM?p=1&vd_source=22e103d2856d069401dd83
 ## iDea page
 ![trim 6E564D00-5857-4A24-B8FC-339A7D67EBFF](https://github.com/EdwinZhanCN/SpringVuePersonalWeb/assets/108310800/9be9ecd8-5a94-4dcc-9f0a-b8f571b93dc7)
 
+## Login Page
+
+https://github.com/EdwinZhanCN/SpringVuePersonalWeb/assets/108310800/a083148c-b0f2-43ae-85ee-8091c29bc4cf
+
+
