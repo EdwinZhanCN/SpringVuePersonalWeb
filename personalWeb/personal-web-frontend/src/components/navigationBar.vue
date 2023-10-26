@@ -27,12 +27,10 @@ export default defineComponent({
   .navigation {
     padding-top: 20px;
     padding-left: 53px;
-    padding-right: 53px;
-    max-width: 957px;
     height: 50px;
     display: grid;
-    grid-gap: 3rem;
-    grid-template-columns: 2fr 7fr;
+    grid-template-columns: 1fr 4fr;
+    grid-gap: 2rem;
   }
 }
 

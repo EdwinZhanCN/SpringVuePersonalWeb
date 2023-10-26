@@ -129,10 +129,8 @@ export default {
 <template>
   <video v-if = "songInfo.length > 0"
          preload="auto"
-         controls
+         hidden="hidden"
          autoplay
-         width="20"
-         height="20"
          :src = songInfo[0].url
           >
   </video>

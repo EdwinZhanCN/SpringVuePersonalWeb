@@ -10,9 +10,10 @@
         <el-icon size="large" ><ArrowRightBold /></el-icon>
       </button>
       <div id = "text-container" class="text-container">
-          Listen my playlist
+        Listen my playlist
       </div>
     </div>
+
     <div class = "visual-cliff">
       <visual-cliff/>
     </div>
@@ -59,7 +60,7 @@
   height: 36px;
   opacity: 0;
   width: 0;
-  z-index: 0;
+  z-index: 1;
   bottom: 20px;   /* 调整为距离底部20px */
   left: 50%;     /* 使其在水平方向上居中 */
   transform: translateX(-40%);
@@ -82,7 +83,7 @@
   height: 50px;
   margin-bottom: 20px;
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   bottom: 0;
   left: calc(50% - 10px);
   border-color: rgba(255, 255, 255, 0.2);

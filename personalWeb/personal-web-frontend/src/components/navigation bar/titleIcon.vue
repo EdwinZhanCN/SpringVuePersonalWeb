@@ -12,12 +12,12 @@ import router from "@/router";
   font-family: "Helvetica",sans-serif;
   cursor: pointer;
   width: auto;  /* 或根据需要设置宽度 */
-  height: auto;
+  height: 44px;
   border-radius: 10px;
-  background-color: rgb(242,242,247);  /* 或根据需要设置颜色 */
+  background-color: rgb(199,199,204,.3);  /* 或根据需要设置颜色 */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
-  line-height: 1em;
+  line-height: .7em;
   color: black;
 }
 </style>

@@ -7,5 +7,9 @@ export const useStore = defineStore('store', () => {
     const isCache = reactive({
         isCache: false
     })
-    return {auth, isCache}
+
+    const active = reactive({
+        active:null
+    })
+    return {auth, isCache, active}
 })

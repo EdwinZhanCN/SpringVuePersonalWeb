@@ -1,5 +1,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+import {useStore} from "@/stores";
+const store = useStore()
+
 const tags = ref([
   {
     title: 'My first App',
@@ -19,8 +22,6 @@ const tags = ref([
     ],
   },
 ]);
-
-
 </script>
 
 <template>
@@ -34,7 +35,7 @@ const tags = ref([
             </header>
             <ul class="list">
               <li v-for="item in tag.items" :key="item.href">
-                <a :class=item.class :href="item.href" :aria-current="item.ariaCurrent">
+                <a :class="{ 'list-link': true, 'active': item.href === '#' + store.active.active }" :href="item.href" :aria-current="item.ariaCurrent">
                   {{ item.text }}
                 </a>
               </li>
@@ -56,15 +57,15 @@ const tags = ref([
   position: relative;
 }
 
-ul{
+.sidebar ul{
   padding:0;
 }
 
-a{
+.sidebar a{
   text-decoration: none;
 }
 
-li{
+.sidebar li{
   display: list-item;
   text-align: -webkit-match-parent;
 }
@@ -95,25 +96,25 @@ li{
   padding-left: 0;
 }
 
-.sidebar .list-link:not(.button){
-  color: black;
-  border-left: 2px solid rgba(0,0,0,0.3);
-  display: block;
-  padding: .5rem 1rem;
-  text-decoration: none;
+.sidebar .list li{
+  font-size: 14px;
+  margin: 0;
 }
+.list-link{
+   color: black;
+   border-left: 2px solid rgba(0,0,0,0.3);
+   display: block;
+   padding: .5rem 1rem;
+   text-decoration: none;
+ }
 
-.sidebar .list-link:not(.button) .active{
+.list-link .active{
   border-left-color: #c85a64;
   background-color: rgba(146,187,143,0.6);
 }
 
-.sidebar .list-link:not(.button):hover{
+.list-link:hover{
   color: #92bb8f;
-}
-.sidebar .list li{
-  font-size: 14px;
-  margin: 0;
 }
 
 .sidebar-inner{

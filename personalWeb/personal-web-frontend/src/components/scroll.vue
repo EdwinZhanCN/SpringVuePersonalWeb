@@ -4,7 +4,7 @@
         :list="images1"
         class="scroll"
         direction = "left"
-        step = 0.6
+        step = 0.4
     >
       <img v-show= "response" v-for="image in images1" :key="image" :src="image" alt="database-image"/>
     </vue3-seamless-scroll>
@@ -12,7 +12,7 @@
         :list="images2"
         class="scroll"
         direction = "left"
-        step = 0.8
+        step = 0.5
     >
       <img v-show= "response" v-for="image in images2" :key="image" :src="image" alt="database-image"/>
     </vue3-seamless-scroll>
@@ -20,7 +20,7 @@
         :list="images3"
         class="scroll"
         direction = "left"
-        step = 0.7
+        step = 0.6
     >
       <img v-show= "response" v-for="image in images3" :key="image" :src="image" alt="database-image"/>
     </vue3-seamless-scroll>

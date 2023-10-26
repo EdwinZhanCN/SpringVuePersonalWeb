@@ -91,6 +91,7 @@ const goToResetPassword = async () => {
 <style>
 
 h2{
+  font-family: Futura, sans-serif;
   padding: 30px;
   margin-block-end: 0;
   margin-block-start: 0;
@@ -119,6 +120,7 @@ h2{
 }
 
 .space-center{
+  font-family: Futura, sans-serif;
   flex-direction: column;
   display: flex;
   width: 80%;
@@ -126,6 +128,7 @@ h2{
 }
 
 .text-area{
+  font-family: Futura, sans-serif;
   padding-left: 0;
   padding-right: 0;
   padding-bottom: 0;

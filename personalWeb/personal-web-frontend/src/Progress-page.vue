@@ -2,8 +2,8 @@
 import ProgressSideBar from "@/components/progress/Progress-sideBar.vue";
 import ProgressMain from "@/components/progress/Progress-main.vue";
 import {onMounted, onUnmounted, ref} from "vue";
-
-const activeId = ref(null);
+import {useStore} from "@/stores";
+const store = useStore()
 
 function updateActiveId() {
   const sections = ['intro', 'fakeClass', 'gameLogic', 'intro2', 'bisearch', 'dataSelect', 'userInter'];
@@ -11,7 +11,7 @@ function updateActiveId() {
     const element = document.getElementById(section);
     const rect = element.getBoundingClientRect();
     if (rect.top <= 0 && rect.bottom >= 0) {
-      activeId.value = section;
+      store.active.active = section;
       break;
     }
   }
@@ -43,7 +43,7 @@ onUnmounted(() => {
 </div>
 </template>
 
-<style scoped>
+<style>
 
 .main-wrapper{
   max-width: 1200px;
@@ -64,6 +64,8 @@ section {
   padding: 0;
   position: relative;
 }
+
+
 
 .main-content{
   grid-area: main;

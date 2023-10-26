@@ -33,7 +33,7 @@ export default {
   <div class="content" style="background-color: #6880a6"><p>
     In darkness the One appears as uniform; in the light the One appears
     as manifold.
-  </p><iframe width="100%" height="100%" src="https://www.youtube.com/embed/rGmoljGmKPI?si=rmcX1zGGce6GaUHl"
+  </p><iframe width="100%" height="98%" src="https://www.youtube.com/embed/rGmoljGmKPI?si=rmcX1zGGce6GaUHl"
               title="YouTube video player" frameborder="0" allow="accelerometer;
               autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;
               web-share" allowfullscreen>
