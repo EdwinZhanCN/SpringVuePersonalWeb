@@ -249,7 +249,7 @@ const goToLogin = async () => {
 </template>
 
 
-<style>
+<style scoped>
 h1{
   animation: fadeIn 0.3s forwards;
   padding-top: 30px;

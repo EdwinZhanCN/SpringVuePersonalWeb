@@ -1,5 +1,5 @@
 <template>
-  <nav class="nav-list">
+  <nav class="idea-nav-list">
     <div class="list-item" v-for="(page, index) in pages" :key="index">
       {{ page.title }}
     </div>
@@ -32,7 +32,7 @@ export default {
   --r: 10px
 }
 
-.nav-list{
+.idea-nav-list{
   z-index: 1;
   position: relative;
   margin: 0;

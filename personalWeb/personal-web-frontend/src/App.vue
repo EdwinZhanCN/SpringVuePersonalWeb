@@ -11,6 +11,7 @@ import VisualCliff from "@/components/visual-cliff.vue";
 import LoginWelcome from "@/login-welcome.vue";
 import ProgressPage from "@/Progress-page.vue";
 import ProgressSideBar from "@/components/progress/Progress-sideBar.vue";
+import SeamlessScroll from "@/seamless-scroll.vue";
 
 const store = useStore()
 
@@ -27,9 +28,7 @@ if(store.auth.user == null){
 </script>
 
 <template>
-  <div>
-    <progress-page/>
-  </div>
+  <seamless-scroll/>
 </template>
 
 <style>

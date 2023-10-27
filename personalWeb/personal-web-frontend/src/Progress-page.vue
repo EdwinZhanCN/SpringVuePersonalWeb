@@ -43,7 +43,7 @@ onUnmounted(() => {
 </div>
 </template>
 
-<style>
+<style scoped>
 
 .main-wrapper{
   max-width: 1200px;
