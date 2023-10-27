@@ -82,9 +82,9 @@ public class AuthorizeServiceImplement implements AuthorizeService {
         }
         //if send failed, delete the value in Redis
         //When User is registering, get the value from Redis, then check if the verification code identical
-
-
     }
+
+
     @Override
     public String validateAndRegister(String username, String password, String email, String code, String sessionId){
         String key = "email:" + sessionId + ":" + email;
