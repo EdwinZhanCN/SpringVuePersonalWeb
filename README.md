@@ -18,6 +18,7 @@ Studying Springboot and Vue.js personal web project
 https://github.com/EdwinZhanCN/SpringVuePersonalWeb/assets/108310800/801045e7-27db-4948-8f38-d99747fb2262
 ## Login Page
 （虽丑，功能实现就行，特别鸣谢 *University of Bilibili*）
+
 https://github.com/EdwinZhanCN/SpringVuePersonalWeb/assets/108310800/a083148c-b0f2-43ae-85ee-8091c29bc4cf
 ## Register
 https://github.com/EdwinZhanCN/SpringVuePersonalWeb/assets/108310800/65b2c89a-5737-48fc-8ffe-bac2261b5bb4
