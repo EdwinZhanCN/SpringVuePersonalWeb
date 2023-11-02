@@ -9,8 +9,16 @@ Using **Azure Virtual Machine in Linux** and **Github** build a personal website
 This blog will be divided into different sections, allowing you to easily **check any missed steps**, **discover areas** you need to understand, or **follow my mind from the beginning.**
 
 **Why Azure ?**
-* It is a great chance for **students in China mainland** to create their own website that can access by **anywhere around the world!** Hardly have some one teach you to use this in China. You need to try this virtual machine provided by **Microsoft.**  it's cloud server at East Asia is located in HongKong, so you don't need to worry about **Network Delays**, **ICP Record number or Filling number**, etc. You can even try to access **ChatGPT** by use this VM!
 
+This presents an excellent opportunity for students in 
+**mainland China** to create their own websites that are accessible from 
+**anywhere around the world!** Such guidance is ***scarce in China***, so it's a 
+chance to explore on your own. Microsoft provides a virtual machine 
+with a cloud server located in *East Asia*, specifically in **Hong Kong.** 
+This location ensures minimal network delays, 
+and you do not need to worry about obtaining an 
+*ICP Record number* or completing any *filing procedures*, etc. 
+Additionally, you can use this VM to access ***ChatGPT*** and many other services!
 ## Crucial steps
 * Set a cloud server :cloud:
 * Using [Nginx](https://nginx.org/en/) to build a HTTP/HTTPS Server :computer:

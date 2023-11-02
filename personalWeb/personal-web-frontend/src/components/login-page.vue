@@ -29,6 +29,8 @@ const login = () =>{
       },() => {
         store.auth.user = null
       })
+    },()=>{
+      ElMessage.warning("username or password not correct!")
     })
   }
 }

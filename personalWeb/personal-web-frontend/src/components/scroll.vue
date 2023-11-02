@@ -1,30 +1,4 @@
 <template>
-  <!--<div class="scroll-view">-->
-  <!--  <div class="scroll-section">-->
-  <!--    <div class = "scroll-slide">-->
-  <!--      <img v-show= "response" v-for="image in images1" :key="image" :src="image" alt="database-image"/>-->
-  <!--    </div>-->
-  <!--    <div class = "scroll-slide">-->
-  <!--      <img v-show= "response" v-for="image in images1" :key="image" :src="image" alt="database-image"/>-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--  <div class="scroll-section">-->
-  <!--    <div class="scroll-slide">-->
-  <!--      <img v-show= "response" v-for="image in images2" :key="image" :src="image" alt="database-image"/>-->
-  <!--    </div>-->
-  <!--    <div class="scroll-slide">-->
-  <!--      <img v-show= "response" v-for="image in images2" :key="image" :src="image" alt="database-image"/>-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--  <div class="scroll-section">-->
-  <!--    <div class="scroll-slide">-->
-  <!--      <img v-show= "response" v-for="image in images3" :key="image" :src="image" alt="database-image"/>-->
-  <!--    </div>-->
-  <!--    <div class="scroll-slide">-->
-  <!--      <img v-show= "response" v-for="image in images3" :key="image" :src="image" alt="database-image"/>-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--</div>-->
   <div class="scroll-view">
     <vue3-seamless-scroll
         :list="images1"

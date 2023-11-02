@@ -31,13 +31,6 @@ export default defineConfig({
           { text: 'First HTML page!', link: '/First HTML page!'}
         ],
       },
-      {
-        text: 'Blog',
-        collapsed: true,
-        items: [
-            { text: 'Runtime API Examples', link: '/api-examples' },
-        ],
-      }
     ],
 
 

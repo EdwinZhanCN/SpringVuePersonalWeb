@@ -205,7 +205,7 @@ const goToLogin = async () => {
               @validate="onValidate"
           >
             <el-form-item prop="username" label="Username">
-              <el-input v-model="ruleForm.username" :maxlength = "15"/>
+              <el-input v-model="ruleForm.username" placeholder="The length should between 3-15" :maxlength = "15"/>
             </el-form-item>
             <el-form-item label="Password" prop="pass">
               <el-input v-model="ruleForm.pass" :maxlength = "16" type="password" autocomplete="off" />
@@ -250,6 +250,11 @@ const goToLogin = async () => {
 
 
 <style scoped>
+
+*{
+  font-family: "Helvetica Neue", sans-serif;
+}
+
 h1{
   animation: fadeIn 0.3s forwards;
   padding-top: 30px;

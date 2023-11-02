@@ -113,6 +113,4 @@ public class SecurityConfiguration{
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         response.getWriter().write(JSONObject.toJSONString(RestBean.failure(401, exception.getMessage())));
     }
-
-
 }

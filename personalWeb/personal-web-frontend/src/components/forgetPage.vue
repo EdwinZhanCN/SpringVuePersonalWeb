@@ -249,6 +249,9 @@ const resetPassWord = () => {
 </template>
 
 <style scoped>
+*{
+  font-family: "Helvetica Neue", sans-serif;
+}
 .change{
   animation: change 1s forwards;
 }

@@ -53,19 +53,19 @@ response.value = true;
 </script>
 
 <template>
-<div class="scroll-view">
-  <div class="scroll-section"
-       v-for="(images) in [images1]"
-       :key="images"
-  >
-    <div class="scroll-slide">
-      <img v-show="response" v-for="image in images" :key="image" :src="image" alt="database-image"/>
-    </div>
-    <div class="scroll-slide">
-      <img v-show="response" v-for="image in images" :key="image + '-copy'" :src="image" alt="database-image"/>
+  <div class="scroll-view">
+    <div class="scroll imgbx"
+         v-for="(images) in [images1, images2, images3]"
+         :key="images"
+         style="--t: 35s;">
+      <div>
+        <img v-for="image in images" key="image" :src="image" alt="database-img">
+      </div>
+      <div>
+        <img v-for="image in images" key="image-copy" :src="image" alt="database-img">
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <style scoped>
@@ -74,38 +74,54 @@ response.value = true;
   padding: 0;
 }
 .scroll-view{
-  border-radius: 10px;
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-gap: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  animation: trans 8s ease-in-out;
-}
-
-.scroll-section{
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #111;
+}
+
+.imgbx img {
+  margin: 0 10px;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  transition: .5s;
+}
+.scroll {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+}
+
+.scroll div {
   white-space: nowrap;
+  animation: animate var(--t) linear infinite;
+  animation-delay: calc(var(--t) * -1);
 }
 
-.scroll-slide img{
-  width: 220px;
-  height: 220px;
-  margin-left: 10px;
+.scroll div:nth-child(2) {
+  animation: animate2 var(--t) linear infinite;
+  animation-delay: calc(var(--t) / -2);
 }
 
-.scroll-slide{
-  will-change: transform;
-  display: inline-block;
-  animation: 20s slide infinite linear;
-}
-
-@keyframes slide {
-  from {
-    transform: translate3d(0, 0, 0);
+@keyframes animate {
+  0% {
+    transform: translateX(100%);
   }
-  to {
-    transform: translate3d(-100%, 0, 0);
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes animate2 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-200%);
   }
 }
 
