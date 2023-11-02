@@ -19,46 +19,41 @@ export default {
       </a>
     </div>
   </div>
-  <div class="parallax p1">
-  </div>
-  <div class="content" style="background-color: #2c3e50;"><p>The mystery of creation is like the darkness of night--it is great.
-    Delusions of knowledge are like the fog of the morning.</p>
+  <div class="parallax p1"></div>
+  <div class="content" style="background-color: #2c3e50;">
+    <p>
+    </p>
     <iframe width="100%" height="100%" src="https://www.youtube.com/embed/oAIBHmeuKyQ?si=b3rBX1_7e_uKnwTR"
             title="YouTube video player" frameborder="0" allow="accelerometer;
             autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
     </iframe>
-    <p>This longing is for the one who is felt in the dark, but not seen
-    in the day.</p></div>
+    <p>
+    </p>
+  </div>
   <div class="parallax p2"></div>
-  <div class="content" style="background-color: #6880a6"><p>
-    In darkness the One appears as uniform; in the light the One appears
-    as manifold.
-  </p><iframe width="100%" height="98%" src="https://www.youtube.com/embed/rGmoljGmKPI?si=rmcX1zGGce6GaUHl"
+  <div class="content" style="background-color: #6880a6">
+    <p>
+    </p>
+    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/rGmoljGmKPI?si=rmcX1zGGce6GaUHl"
               title="YouTube video player" frameborder="0" allow="accelerometer;
               autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;
               web-share" allowfullscreen>
-  </iframe><p>
-    The birth and death of the leaves are the rapid whirls of the eddy
-    whose wider circles move slowly among stars.
-  </p></div>
+    </iframe>
+    <p>
+    </p>
+  </div>
   <div class="parallax p3"></div>
   <div class="content" style="background-color: #bdc2d5">
-  <p style="color: #c89263">
-    We, the rustling leaves, have a voice that answers the storms,
-    but who are you so silent?"
-    I am a mere flower.
-  </p><iframe width="100%" height="90%" src="https://www.youtube.com/embed/4pIJluV19HY?si=hkNjTLGsKDUpQn-1"
+    <p style="color: #c89263">
+    </p>
+    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/4pIJluV19HY?si=hkNjTLGsKDUpQn-1"
               title="YouTube video player" frameborder="0" allow="accelerometer;
               autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-  </iframe><p style="color: #c89263">
-    Tonight there is a stir among the palm leaves, a swell in the sea,
-    Full Moon, like the heart throb of the world. From what unknown sky hast
-    thou carried in thy silence the aching secret of love?
-  </p>
+    </iframe>
+    <p style="color: #c89263">
+    </p>
   </div>
   <div class="parallax p4"></div>
-
-
 </template>
 
 <style scoped>

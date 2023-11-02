@@ -11,7 +11,7 @@ const comments = ref([{id: 1, author: "John Doe", date: "2021-01-01", body: "Thi
     <div>
         <h1>Comments</h1>
         <div class="comments">
-            <div class="comment" v-for="comment in comments" :key="comment.id">
+            <div class="comment" v-for="comment in MusicPlayer" :key="comment.id">
                 <div class="comment-header">
                     <div class="comment-author">{{ comment.author }}</div>
                     <div class="comment-date">{{ comment.date }}</div>

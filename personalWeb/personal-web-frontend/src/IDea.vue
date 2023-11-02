@@ -5,7 +5,7 @@
       <h1>
         Love songs,   love pop.
       </h1>
-      <scroll/>
+      <seamless-scroll/>
       <button @click = toMusic() class="button">
         <el-icon size="large" ><ArrowRightBold /></el-icon>
       </button>
@@ -22,11 +22,11 @@
 </template>
 
 <script setup>
-  import navigationBar from "@/components/navigationBar.vue";
-  import scroll from "@/components/scroll.vue";
+  import navigationBar from "@/components/IDea-NavigationBar.vue";
   import {ArrowRightBold} from "@element-plus/icons-vue";
   import router from "@/router";
-  import VisualCliff from "@/components/visual-cliff.vue";
+  import VisualCliff from "@/components/IDea-VisualCliff.vue";
+  import SeamlessScroll from "@/components/IDea-SeamlessScroll.vue";
   const toMusic = () =>{
     router.push('/music-player')
   }

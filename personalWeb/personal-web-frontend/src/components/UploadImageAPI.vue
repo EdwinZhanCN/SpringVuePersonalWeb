@@ -5,13 +5,13 @@
 
 <script setup>
 
-import imageUpload from "@/components/imageUpload.vue";
+import imageUpload from "@/components/ImageUpload.vue";
 import {get} from "@/net/index.js";
 import {ref, watch} from "vue";
 import {ElMessage} from "element-plus";
 import router from "@/router";
 import {useStore} from "@/stores";
-import scroll from "@/components/scroll.vue";
+import scroll from "@/components/Derapcated/scroll.vue";
 
 const store = useStore()
 

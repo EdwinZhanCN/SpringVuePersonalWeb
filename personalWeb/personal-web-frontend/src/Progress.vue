@@ -1,6 +1,6 @@
 <script setup>
-import ProgressSideBar from "@/components/progress/Progress-sideBar.vue";
-import ProgressMain from "@/components/progress/Progress-main.vue";
+import ProgressSideBar from "@/components/progress/Progress-SideBar.vue";
+import ProgressMain from "@/components/progress/Progress-Main.vue";
 import {onMounted, onUnmounted, ref} from "vue";
 import {useStore} from "@/stores";
 const store = useStore()

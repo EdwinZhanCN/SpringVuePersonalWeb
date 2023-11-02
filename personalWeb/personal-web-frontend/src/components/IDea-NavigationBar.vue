@@ -7,8 +7,8 @@
 
 <script>
 import {defineComponent} from "vue";
-import list from "@/components/navigation bar/List.vue";
-import titleIcon from "@/components/navigation bar/titleIcon.vue";
+import list from "@/components/IDea-NavigationBar/List.vue";
+import titleIcon from "@/components/IDea-NavigationBar/titleIcon.vue";
 
 export default defineComponent({
   components: {

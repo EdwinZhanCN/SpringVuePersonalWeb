@@ -1,16 +1,13 @@
 <template>
   <div>
-    <h2>图片上传</h2>
+    <h2>Upload Image</h2>
     <form @submit.prevent="uploadImage">
-      <label>选择图片:
+      <label>Select Image:
         <input type="file" ref="fileInput" required>
       </label>
       <br><br>
-      <label>图片描述:
-        <textarea v-model="description" rows="4" cols="50"></textarea>
-      </label>
       <br><br>
-      <button type="submit">上传</button>
+      <button type="submit">Upload</button>
     </form>
   </div>
 </template>
@@ -26,10 +23,13 @@ export default {
     };
   },
   methods: {
+    //upload the album cover Image to the backend
     uploadImage() {
+      //return FormData to match the backend requirement
       const formData = new FormData();
       const fileInput = this.$refs.fileInput;
 
+      //upload image
       if (fileInput.files.length > 0) {
         formData.append('file', fileInput.files[0]);
         formData.append('description', this.description);

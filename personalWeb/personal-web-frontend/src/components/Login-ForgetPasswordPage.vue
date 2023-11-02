@@ -4,13 +4,19 @@ import {ElMessage, FormInstance, FormRules} from "element-plus";
 import {post} from "@/net/index.js";
 import router from '@/router/index.js';
 
+//Animation
 const minimize = ref(false);
+
 const isEmailValidate = ref(false);
 const isEmailCorrect = ref(false);
-const ruleFormRef = ref<FormInstance>();
-const isResettingPassword = ref(true);
-const active = ref(0)
 
+//check the form status
+const ruleFormRef = ref<FormInstance>();
+
+const isResettingPassword = ref(true);
+
+//control the el-step component
+const active = ref(0)
 const next = () => {
   if (active.value++ > 2) active.value = 0
 }
@@ -18,6 +24,7 @@ const setActiveZero =()=>{
   active.value = 0
 }
 
+//form has rules
 const ruleForm = reactive({
   email:'',
   pass: '',
@@ -25,6 +32,7 @@ const ruleForm = reactive({
   emailConfig: '',
 })
 
+//clean the form
 const resetForm = (ruleFormRef) => {
   if (!ruleFormRef) return;
   ruleForm.pass = '';
@@ -32,8 +40,9 @@ const resetForm = (ruleFormRef) => {
   ruleForm.emailConfig= '';
 }
 
-
-
+/*
+  Ask backend to send the email for validating email
+ */
 const validateEmail = () =>{
   cool.value = 60
   post('/api/auth/valid-email', {
@@ -45,14 +54,21 @@ const validateEmail = () =>{
   })
 }
 
+//the timer for resend emil again
 const cool = ref(0);
 
+/*
+  start the coolDown Timer
+ */
 function startCountdown() {
-  let endTime = new Date().getTime() + 60000; // 当前时间加上60秒（60000毫秒）
+  let endTime = new Date().getTime() + 60000; //60000ms
   localStorage.setItem("endTime", endTime.toString());
   updateCountdown();
 }
 
+/*
+  Update the coolDown Timer according to the real time
+ */
 function updateCountdown() {
   const now = new Date().getTime();
   const endTime = parseInt(localStorage.getItem("endTime"), 10);
@@ -70,10 +86,12 @@ function updateCountdown() {
   }
 }
 
+//Update the coolDown timer if the user leave the page, and join again
 onMounted(() => {
   updateCountdown();
 });
 
+//to check if the email already exists in the database by asking backend
 const verifyEmail = () =>{
   post('/api/auth/email-verify', {
     email: ruleForm.email
@@ -83,6 +101,8 @@ const verifyEmail = () =>{
     isEmailCorrect.value = true;
   })
 }
+
+//Verifying the emil validating code
 const verifyCode = () =>{
   post('/api/auth/email-validate-verify', {
     email: ruleForm.email,
@@ -94,8 +114,7 @@ const verifyCode = () =>{
   })
 }
 
-
-
+//the rules
 const checkEmailConfig = (rule: any, value: any, callback: any) => {
   const emailCodeRegex = /^[0-9]{6}$/; // Assuming the code is a 6-character alphanumeric combination
 
@@ -110,7 +129,6 @@ const checkEmailConfig = (rule: any, value: any, callback: any) => {
   }
 }
 
-
 const validatePass = (rule: any, value: any, callback: any) => {
   if (value === '') {
     callback(new Error('Please input the password'))
@@ -122,6 +140,7 @@ const validatePass = (rule: any, value: any, callback: any) => {
     callback()
   }
 }
+
 const validatePass2 = (rule: any, value: any, callback: any) => {
   if (value === '') {
     callback(new Error('Please input the password again'))
@@ -131,6 +150,7 @@ const validatePass2 = (rule: any, value: any, callback: any) => {
     callback()
   }
 }
+
 const checkEmail = (rule: any, value: any, callback: any) => {
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
@@ -159,6 +179,7 @@ const rules = reactive<FormRules<typeof ruleForm>>({
   emailConfig:[{ validator: checkEmailConfig, trigger: ['blur', 'change'] }],
 })
 
+//router settings
 const goToLogin = async () => {
   minimize.value = true;
   await nextTick();
@@ -167,6 +188,7 @@ const goToLogin = async () => {
   }, 1300);
 };
 
+//ask the backend to change the password
 const resetPassWord = () => {
   post('/api/auth/reset-password', {
     password: ruleForm.pass,

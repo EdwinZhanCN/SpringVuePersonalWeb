@@ -1,6 +1,4 @@
 <script setup>
-
-import {Checked} from "@element-plus/icons-vue";
 </script>
 
 <template>

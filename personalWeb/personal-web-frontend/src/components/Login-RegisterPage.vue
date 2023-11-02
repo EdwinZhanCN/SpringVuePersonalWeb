@@ -5,8 +5,15 @@ import router from '@/router'
 import {post} from '@/net/index.js'
 import {ElMessage} from "element-plus";
 
+//create a form rule ref
 const ruleFormRef = ref<FormInstance>()
+
+//this is the parameter backend need to know
 const isResettingPassword = ref(false)
+
+const isEmailValid = ref(false)
+
+//rules
 const checkEmail = (rule: any, value: any, callback: any) => {
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
@@ -43,7 +50,6 @@ const checkUsername = (rule: any, value: any, callback: any) => {
   }
 }
 
-
 const checkEmailConfig = (rule: any, value: any, callback: any) => {
   const emailCodeRegex = /^[0-9]{6}$/; // Assuming the code is a 6-character alphanumeric combination
 
@@ -58,7 +64,6 @@ const checkEmailConfig = (rule: any, value: any, callback: any) => {
   }
 }
 
-
 const validatePass = (rule: any, value: any, callback: any) => {
   if (value === '') {
     callback(new Error('Please input the password'))
@@ -70,6 +75,7 @@ const validatePass = (rule: any, value: any, callback: any) => {
     callback()
   }
 }
+
 const validatePass2 = (rule: any, value: any, callback: any) => {
   if (value === '') {
     callback(new Error('Please input the password again'))
@@ -88,6 +94,7 @@ const ruleForm = reactive({
   emailConfig: '',
 })
 
+//apply rules
 const rules = reactive<FormRules<typeof ruleForm>>({
   pass: [
     { validator: validatePass, trigger: ['blur', 'change']},
@@ -99,13 +106,12 @@ const rules = reactive<FormRules<typeof ruleForm>>({
   emailConfig:[{ validator: checkEmailConfig, trigger: ['blur', 'change'] }],
 })
 
-const isEmailValid = ref(false)
-
 const onValidate = (prop, isValid) => {
   if(prop === 'email')
     isEmailValid.value = isValid
 }
 
+//asking back end to create an account
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
   formEl.validate((valid) => {
@@ -128,11 +134,13 @@ const submitForm = (formEl: FormInstance | undefined) => {
   })
 }
 
+//clean the form
 const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
   formEl.resetFields()
 }
 
+//asking backend to send an email
 const validateEmail = () =>{
   cool.value = 60
   post('/api/auth/valid-email', {
@@ -144,6 +152,7 @@ const validateEmail = () =>{
   })
 }
 
+//coolDown Timer
 const cool = ref(0);
 
 function startCountdown() {
@@ -173,6 +182,7 @@ onMounted(() => {
   updateCountdown();
 });
 
+//animation and router setting
 const minimize = ref(false);
 const goToLogin = async () => {
   minimize.value = true;

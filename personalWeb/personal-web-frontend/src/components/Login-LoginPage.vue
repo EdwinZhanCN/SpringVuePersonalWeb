@@ -5,13 +5,20 @@ import {get, post} from "@/net/index.js";
 import {reactive, ref, nextTick} from 'vue';
 import router from "@/router";
 import {useStore} from "@/stores";
+//used to update the status of login
 const store = useStore();
+
+//animation
+const expanding = ref(false);
+
+//create a form
 const form = reactive({
   username:'',
   password: '',
   remember: false
 })
 
+//ask the backend to check if the user is allowed to login
 const login = () =>{
   if(!form.username || !form.password){
     ElMessage.warning('Please Enter the password or username')
@@ -35,9 +42,7 @@ const login = () =>{
   }
 }
 
-const expanding = ref(false);
-
-
+//Animation and router setting
 const goToRegister = async () => {
   expanding.value = true;
   await nextTick();

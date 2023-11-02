@@ -8,42 +8,42 @@ const router = createRouter({
         {
             path: '/idea',
             name:'idea',
-            component: () => import("@/idea.vue"),
+            component: () => import("@/IDea.vue"),
         },
         {
             path: '/',
             name:'main',
-            component: () => import("@/main.vue"),
+            component: () => import("@/Main.vue"),
         },
         {
             path:'/login',
             name:'login-welcome',
-            component: () => import('@/login-welcome.vue'),
+            component: () => import('@/Login-Welcome.vue'),
             children:[
                 {
                     path: '',
                     name: 'login-login',
-                    component: () => import('@/components/login-page.vue')
+                    component: () => import('@/components/Login-LoginPage.vue')
 
                 },{
                     path:'/register',
                     name:'login-Register',
-                    component: () => import("@/components/RegisterPage.vue")
+                    component: () => import("@/components/Login-RegisterPage.vue")
                 },{
                     path:'/forget-password',
                     name:'login-forgetPassword',
-                    component:() =>import("@/components/forgetPage.vue")
+                    component:() =>import("@/components/Login-ForgetPasswordPage.vue")
                 }]
         },
         {
             path:'/upload-image',
             name:'upload-image',
-            component: () => import('@/components/upload-image.vue')
+            component: () => import('@/components/UploadImageAPI.vue')
         },
         {
             path:'/music-player',
             name:'music-player',
-            component: () => import('@/player-frame.vue')
+            component: () => import('@/MusicPlayer.vue')
         },
         {
             path: '/blog',

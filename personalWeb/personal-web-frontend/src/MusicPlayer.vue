@@ -1,11 +1,10 @@
 <script>
 import {ref} from "vue";
 import {Document, Location, Setting} from "@element-plus/icons-vue";
-import Dock from "@/components/dock.vue";
+import Dock from "@/components/MusicPlayer-Dock.vue";
 import {get} from "@/net";
 
 export default {
-  name:"player-frame",
   components: {Dock, Setting, Document, Location},
   setup(){
     const customColor = ref("background: gray")
@@ -16,12 +15,12 @@ export default {
     const audioRef = ref(null);
 
     function timestampToMilliseconds(timestamp) {
-      const pattern1 = /(\d{2}):(\d{2})\.(\d{3})/;  // [00:00.000]
-      const pattern2 = /(\d{2}):(\d{2})\.(\d{2})/;  // [00:00.00]
-      const pattern3 = /(\d{2}):(\d{2})/;           // [00:00]
+      const pattern1 = /(\d{2}):(\d{2})\.(\d{3})/;
+      const pattern2 = /(\d{2}):(\d{2})\.(\d{2})/;
+      const pattern3 = /(\d{2}):(\d{2})/;
 
       let result;
-
+      //unpack
       if ((result = pattern1.exec(timestamp))) {
         return Number(result[1]) * 60 * 1000 + Number(result[2]) * 1000 + Number(result[3]);
       } else if ((result = pattern2.exec(timestamp))) {
@@ -29,19 +28,19 @@ export default {
       } else if ((result = pattern3.exec(timestamp))) {
         return Number(result[1]) * 60 * 1000 + Number(result[2]) * 1000;
       } else {
-        console.log("时间戳解析失败！");  // 修正了 console 的调用，添加了 log 方法
-        return -1;  // 无法匹配的时间戳格式
+        console.log("时间戳解析失败！");
+        return -1;
       }
     }
 
     function processLyrics(lyrics) {
       const lines = lyrics.split('\n');
       for (let line of lines) {
-        const pattern = /\[(\d{2}:\d{2}(?:\.\d{2,3})?)\](.+)/;  // 更新了正则表达式以匹配新的时间戳格式
+        const pattern = /\[(\d{2}:\d{2}(?:\.\d{2,3})?)\](.+)/;
         const match = pattern.exec(line);
-        if (match && match[1] && match[2]) {  // 更新了数组索引以匹配新的正则表达式
+        if (match && match[1] && match[2]) {
           const time = timestampToMilliseconds(match[1]);
-          const lyric = match[2].trim();  // 更新了数组索引以匹配新的正则表达式
+          const lyric = match[2].trim();
           if (time !== -1) {
             currentSongLyric.value.push({
               time,
@@ -56,8 +55,8 @@ export default {
 
     const fetchSongs = (callback) => {
       get('/api/songs/get',
-          (message) => {  // success回调
-            songInfo.value = message.map(song => ({  // 假设message直接返回歌曲数组
+          (message) => {
+            songInfo.value = message.map(song => ({
               artist: song.artist,
               genre: song.genre,
               title: song.title,
@@ -66,16 +65,14 @@ export default {
             }));
             if (callback) callback();
           },
-          (errorMessage, status) => {  // failure回调
+          (errorMessage, status) => {
             console.error(`Error with status ${status}: ${errorMessage}`);
           },
-          (error) => {  // axios catch回调
+          (error) => {
             console.error('Axios error:', error);
           }
       );
     }
-
-
 
     const fetchLyrics = async (url) => {
       try {
@@ -102,14 +99,6 @@ export default {
       activeIndex.value++;
     };
 
-    const togglePlay = () => {
-      const video = audioRef.value;
-      if (video.paused) {
-        video.play();
-      } else {
-        video.pause();
-      }
-    }
 
     return {
       customColor,
@@ -118,8 +107,6 @@ export default {
       currentSongLyric,
       scrollLyrics,
       songInfo,
-      togglePlay,
-      audioRef
     }
   }
 }
