@@ -5,14 +5,14 @@ In last article, we just download a SSH key in our computer, now we need this ke
 
 **Open** your downloaded VSCode, it should be like this:
 
-<img src = "image/vscode-download.png"/>
+<img src = "./image/vscode-download.png"/>
 
 ## Add Remote-SSH Extension
 On the left side bar, you can see there is a icon with 4 blcoks, click it, and you can find any extensions you want. For here, we search `Remote-SSH`, then click **Download**.
-<img src = "image/ssh-extension.png"/>
+<img src = "./image/ssh-extension.png"/>
 
 On the left side bar, open the small computer icon, which is the Remote-SSH extension, and you can see a UI like this:
-<img src = "image/open-ssh.png"/>
+<img src = "./image/open-ssh.png"/>
 
 ## Create a folder for SSH key files
 Next, **move** your dowloaded ssh key files into such directory:
@@ -36,16 +36,20 @@ connection link as following:
 ```bash
 ssh -i path/to/your/SSHkeyfilname.pub yourusername@Public IP address
 ```
-<img src = "image/set-ssh.png"/>
+<img src = "./image/set-ssh.png"/>
 
 You can see your Public IP address on your **Azure Portal->Resources->your VM->Overview** and copy it. You can also find your username and IP address in **Connect->connect**:
-<img src="image/find-username.png"/>
+
+<img src="./image/find-username.png"/>
 
 After stroke enter, VSCode will ask you to add the path of `config` file. Reminds that the `config` file should be the **same** directory  you save your SSH key file. You can specify your path to the folder by clicking **Settings.**
-<img src = "image/set-config.png"/>
+
+<img src = "./image/set-config.png"/>
 
 By pressing <kbd>Enter</kbd>, a small window will pop out from the bottom-right of VSCode:
-<img src = "image/connect-small.png"/>
+
+<img src = "./image/connect-small.png"/>
+
 Click `Connect`
 
 ## Have a connection erro?
@@ -55,10 +59,15 @@ You may need to use following code to copy your key to your VM:
 ssh-copy-id -i path/to/your/SSHkeyfilname.pub yourusername@Public IP address
 ```
 To check if the connection is successful, you can see if  your host IP address shown on the footer of VSCode:
-<img src = "/image/check-connection.png"/>
+
+<img src = "./image/check-connection.png"/>
+
 Next, Go to **Terminal->New Terminal**
-<img src = "/image/open-terminal.png"/>
-<img src = "/image/bash-terminal.png"/>
+
+<img src = "./image/open-terminal.png"/>
+
+<img src = "./image/bash-terminal.png"/>
+
 If you see this page, you are successfully connect to your Azure VM!
 
 And we will set our HTTP server in next article->

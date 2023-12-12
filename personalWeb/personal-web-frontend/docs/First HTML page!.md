@@ -4,19 +4,19 @@
 
 ## Registar GitHub
 Go to [GitHub](https://github.com/), click `Sign Up`:
-<img src = "/image/github-main.png"/>
+<img src = "./image/github-main.png"/>
 
 Follow the sign up instructions:
-<img src = "image/register-github.png"/>
+<img src = "./image/register-github.png"/>
 
 click `Create new repository`
-<img src = "/image/create-github.png"/>
+<img src = "./image/create-github.png"/>
 
 simply fill the spaces and set your repository to be **Private**
-<img src = "image/repo-info.png"/>
+<img src = "./image/repo-info.png"/>
 
 Copy the link in code->local:
-<img src = "image/clone-info.png"/>
+<img src = "./image/clone-info.png"/>
 
 OK, then we back to our VM Teminals, and install **Git**:
 ```bash

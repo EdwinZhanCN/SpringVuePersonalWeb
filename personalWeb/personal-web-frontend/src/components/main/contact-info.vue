@@ -38,8 +38,8 @@ export default {
             v-for = "item in contactItems"
             :key = "item.name"
         >
-          <a class = "contact-link" href={{item.url}} target="_blank">
-            <img src={{item.imgUrl}}>
+          <a class = "contact-link" :href=item.url target="_blank">
+            <img :src=item.imgUrl alt="_item-image">
             <span>
               Bilibili Personal Space
             </span>

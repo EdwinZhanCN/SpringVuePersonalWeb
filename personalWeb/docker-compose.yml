@@ -8,14 +8,13 @@ services:
       SPRING_MAIL_USERNAME: edwinzhanofficialnonreply@gmail.com
       SPRING_MAIL_PASSWORD: hjlj nrsd qwxo trwn
       SPRING_AZURE_STORAGE_CONNECTION_STRING: DefaultEndpointsProtocol=https;AccountName=edwinzhan;AccountKey=PacvWriDCVYmFze/WEnxsfxLQhuacHnjg8ITz0rpU8pmHPVd0JhmLQ4cIQOFfq6NABqe8/rIfUKp+AStdnH9aw==;EndpointSuffix=core.windows.net
-    build: . #build the docker file
+    build: personal-web #build the docker file
     ports:
     - "8080:8080"
     depends_on:
     - mysql
     - redis
-    restart: always
-
+    restart: on-failure
   mysql:
     container_name: app_mysql
     image: mysql/mysql-server:latest
@@ -31,4 +30,22 @@ services:
     image: redis:alpine
     ports:
       - "6379:6379"
+
+  vue-app:
+    container_name: app_vue
+    build:
+      context: personal-web-frontend
+      dockerfile: Dockerfile-Vue
+    ports:
+      - "3516:3516"
+    depends_on:
+      - spring
+
+  vitepress-docs:
+    container_name: app_vitepress
+    build:
+      context: personal-web-frontend
+      dockerfile: Dockerfile-VitePress
+    ports:
+      - "3517:3517"
 

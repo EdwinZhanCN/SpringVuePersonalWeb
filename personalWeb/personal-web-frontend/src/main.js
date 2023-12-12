@@ -7,7 +7,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { createPinia } from 'pinia';
 import vue3SeamlessScroll from "vue3-seamless-scroll";
 
-import App from './APP.vue'
+import App from './App.vue'
 import axios from "axios";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'

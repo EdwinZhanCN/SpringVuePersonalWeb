@@ -11,7 +11,7 @@ Just follow these links to buy your favorite domain name. The name not end with 
 >* Others you may like…..
 
 I can not teach you how to buy domain names in all websites, but you **should have a control center** of your domain name like this after you buy it. (TencentCloud):
-<img src = "image/domain-show.png"/>
+<img src = "./image/domain-show.png"/>
 OK.
 :::warning
 Make sure you get your own domain name and you can manage it, it is very important.
@@ -106,7 +106,7 @@ Check the status:
 sudo systemctl status nginx
 ```
 **Now**, try to access your VM by simply input your **Public IP Address**, if it shows:
-<img src= "image/nginx-start.png"/>
+<img src= "./image/nginx-start.png"/>
 
 **Your are success to access your Nginx (A web server) by Internet!**
 So, where is this page comes from? `/var/www/` is a directory Nginx provides us, you can upload your website files here, it is a default root for our website. You can see the source code of defualt page by:
@@ -148,14 +148,14 @@ By accessing `www`, we need to add tow records
 >* **Record value:** Your public IP address
 >* **TTL:** 600
 
-<img src = "/image/add-record.png"/>
+<img src = "./image/add-record.png"/>
 Others are optional.
 
 After you did this, you can **use your domain name** to access the Nginx default page! 
 ::: warning
 Reminds! Using `http://`instead of `https://`
 :::
-<img src = "/image/access-domain.png"/>
+<img src = "./image/access-domain.png"/>
 
 ***Here we go!***
 

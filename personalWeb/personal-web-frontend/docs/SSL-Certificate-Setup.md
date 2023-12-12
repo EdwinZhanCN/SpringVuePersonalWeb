@@ -4,7 +4,7 @@ Generally, If you don't want your Website to be "Not Secure", you need this.
 
 ## Get a SSL Certificate
 Similar to a domain name, you need an SSL Certificate from sellers, and you need a **management station** to handle it. An SSL Certificate should be bound to your domain name.
-<img src = "image/ssl-seller.png"/>
+<img src = "./image/ssl-seller.png"/>
 
 After you obtain a SSL certificate, you need to download your certificate. Since we are using Nginx, there are two files: one with a .pem extension and another with a .key extension.**(pem/key)**
 
@@ -18,10 +18,10 @@ Remember, using `sudo -i` to switch to the root user can make your life easier!
 Now, we need to upload our `.pem` and `.key` files to our VM. Click the **Open... icon** on the welcome page of VSCode or go to **File->Open Folder...** on the top of the screen:
 
 Then search `/etc/ssl/`, click `OK`.
-<img src = "/image/search-ssl.png"/>
+<img src = "./image/search-ssl.png"/>
 
 Now you can see a **File directory system** is shown on the left sidebar, so you can simply **drag your key/pem files into the *ssl* directory**. That's reason why I choose VSCode to connect our VM, it is simple and readable.
-<img src = "/image/ssl-drag.png"/>
+<img src = "./image/ssl-drag.png"/>
 
 After you finish uploading the files, go to our sites-available default file:
 ```bash

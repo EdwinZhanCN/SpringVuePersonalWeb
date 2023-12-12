@@ -27,11 +27,11 @@ Additionally, you can use this VM to access ***ChatGPT*** and many other service
 * Design your website :point_right:
 
 ## Applicantions you need
-<img src="/image/visual-studio-code-1.svg" width="30" height="30">
+<img src="./image/visual-studio-code-1.svg" width="30" height="30">
 
 [Visual Studio Code](https://code.visualstudio.com)
 
-<img src="/image/webstorm-icon.svg" width="30" height="30">
+<img src="./image/webstorm-icon.svg" width="30" height="30">
 
 [WebStorm (Optional)](https://www.jetbrains.com/webstorm/)
 
