@@ -1,12 +1,11 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/personal_web
+    url: jdbc:mysql://app_mysql:3306/personal-web
     username: root
     password: 12345678
   mail:
     host: smtp.gmail.com
-
     username: edwinzhanofficialnonreply@gmail.com
     password: hjlj nrsd qwxo trwn
     port: 465
@@ -17,12 +16,9 @@ spring:
           auth: true
           socketFactory:
             class: javax.net.ssl.SSLSocketFactory
-  data:
-    redis:
-      database: 0
-      host: localhost
-      port: 6379
   jpa:
+    database: mysql
+    show-sql: true
     hibernate:
       ddl-auto: update
   servlet:
@@ -33,6 +29,9 @@ spring:
     storage:
       connection-string: DefaultEndpointsProtocol=https;AccountName=edwinzhan;AccountKey=PacvWriDCVYmFze/WEnxsfxLQhuacHnjg8ITz0rpU8pmHPVd0JhmLQ4cIQOFfq6NABqe8/rIfUKp+AStdnH9aw==;EndpointSuffix=core.windows.net
       container-name: web-app
+  data:
+    redis:
+      host: app_redis
 #logging:
 #  level:
 #    root: DEBUG

@@ -1,0 +1,34 @@
+version: '4.26'
+
+services:
+  spring:
+    container_name: app_springboot
+    environment:
+      SPRING_MAIL_HOST: smtp.gmail.com
+      SPRING_MAIL_USERNAME: edwinzhanofficialnonreply@gmail.com
+      SPRING_MAIL_PASSWORD: hjlj nrsd qwxo trwn
+      SPRING_AZURE_STORAGE_CONNECTION_STRING: DefaultEndpointsProtocol=https;AccountName=edwinzhan;AccountKey=PacvWriDCVYmFze/WEnxsfxLQhuacHnjg8ITz0rpU8pmHPVd0JhmLQ4cIQOFfq6NABqe8/rIfUKp+AStdnH9aw==;EndpointSuffix=core.windows.net
+    build: . #build the docker file
+    ports:
+    - "8080:8080"
+    depends_on:
+    - mysql
+    - redis
+    restart: always
+
+  mysql:
+    container_name: app_mysql
+    image: mysql/mysql-server:latest
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: 'personal-web'
+      MYSQL_ROOT_PASSWORD: 12345678
+    ports:
+      - "3306:3306"
+
+  redis:
+    container_name: app_redis
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
