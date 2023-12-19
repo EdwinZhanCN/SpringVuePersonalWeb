@@ -37,7 +37,7 @@ services:
       context: personal-web-frontend
       dockerfile: Dockerfile-Vue
     ports:
-      - "3516:3516"
+      - "3516:80"
     depends_on:
       - spring
 
@@ -47,5 +47,5 @@ services:
       context: personal-web-frontend
       dockerfile: Dockerfile-VitePress
     ports:
-      - "3517:3517"
+      - "3517:80"
 
