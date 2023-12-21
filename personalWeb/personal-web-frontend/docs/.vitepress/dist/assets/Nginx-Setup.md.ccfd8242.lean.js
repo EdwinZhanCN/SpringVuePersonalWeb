@@ -1,0 +1,1 @@
+import{_ as s,o,c as n,Q as a}from"./chunks/framework.7ed72bc6.js";const q=JSON.parse('{"title":"Setup Nginx","description":"","frontmatter":{},"headers":[],"relativePath":"Nginx-Setup.md","filePath":"Nginx-Setup.md"}'),p={name:"Nginx-Setup.md"},l=a("",19),t=[l];function e(r,c,E,y,F,u){return o(),n("div",null,t)}const C=s(p,[["render",e]]);export{q as __pageData,C as default};
