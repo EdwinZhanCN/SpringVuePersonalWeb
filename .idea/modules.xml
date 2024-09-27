@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Springboot-Vue.iml" filepath="$PROJECT_DIR$/.idea/Springboot-Vue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/personalWeb/personal-web/personal-web.iml" filepath="$PROJECT_DIR$/personalWeb/personal-web/personal-web.iml" />
+    </modules>
+  </component>
+</project>

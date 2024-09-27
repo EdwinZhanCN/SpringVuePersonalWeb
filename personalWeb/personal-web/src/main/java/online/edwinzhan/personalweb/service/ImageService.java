@@ -8,9 +8,12 @@ import online.edwinzhan.personalweb.repository.ImageRepository;
 
 import java.util.List;
 import java.util.Optional;
-
+/*
+Using JPA Repo to complete the auto update of the database
+ */
 @Service
 public class ImageService {
+
     private final ImageRepository imageRepository;
     @Autowired
     public ImageService(ImageRepository imageRepository) {

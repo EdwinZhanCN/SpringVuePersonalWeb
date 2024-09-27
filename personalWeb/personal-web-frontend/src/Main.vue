@@ -12,9 +12,7 @@ export default {
 </script>
 
 <template>
-  <mainNavigation/>
-  <daily-wrapper/>
-  <contact-info/>
+
 </template>
 
 <style scoped>

@@ -2,6 +2,7 @@
 
 import {get} from "@/net/index.js"
 import {useStore} from "@/stores";
+import Gallery from "@/components/Gallery.vue";
 
 const store = useStore()
 
@@ -18,7 +19,7 @@ if(store.auth.user == null){
 </script>
 
 <template>
-  <router-view/>
+  <RouterView/>
 </template>
 
 <style>
